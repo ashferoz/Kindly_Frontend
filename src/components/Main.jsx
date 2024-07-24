@@ -15,24 +15,28 @@ const Main = () => {
   });
   return (
     <div>
-      <RequestCounter />
-      <h3 className="font-epilogue text-5xl text-[#0753d8] text-center py-10 font-light italic">
-        Give and receive help in your community.
-      </h3>
-      <div className="font-epilogue flex justify-center space-x-20">
-        <FormBtn>Want to help?</FormBtn>
-        <FormBtn>Need help?</FormBtn>
+      <div className="bg-[#ffc0cc] py-10">
+        <RequestCounter />
+        <h3 className="font-epilogue text-5xl text-[#0753d8] text-center py-10 font-light italic">
+          Give and receive help in your community.
+        </h3>
+        <div className="font-epilogue flex justify-center space-x-20">
+          <FormBtn>Want to help?</FormBtn>
+          <FormBtn>Need help?</FormBtn>
+        </div>
       </div>
       <div className="w-full px-10 py-20 flex flex-wrap gap-10">
         {isSuccess &&
           data.map((item) => {
-            return <RequestCard 
-            key={item.request_id}
-            title={item.title}
-            category={item.request_category}
-            username={item.username}
-            className=""
-            />;
+            return (
+              <RequestCard
+                key={item.request_id}
+                title={item.title}
+                category={item.request_category}
+                username={item.username}
+                className=""
+              />
+            );
           })}
       </div>
       {isFetching && <h1>Loading...</h1>}

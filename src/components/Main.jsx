@@ -1,6 +1,7 @@
 import React from "react";
 import RequestCounter from "./RequestCounter";
 import FormBtn from "./FormBtn";
+import RequestCard from "./RequestCard";
 
 const Main = () => {
   return (
@@ -12,6 +13,9 @@ const Main = () => {
       <div className="font-epilogue flex justify-center space-x-20">
         <FormBtn>Want to help?</FormBtn>
         <FormBtn>Need help?</FormBtn>
+      </div>
+      <div className="w-full px-10 py-20">
+        <RequestCard />
       </div>
     </div>
   );

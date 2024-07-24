@@ -1,10 +1,11 @@
-import RequestCounter from "./components/RequestCounter";
+import Main from "./components/Main";
+
 
 function App() {
   return (
     <>
       <div className="font-fraunces">
-        <RequestCounter />
+        <Main />
       </div>
     </>
   );

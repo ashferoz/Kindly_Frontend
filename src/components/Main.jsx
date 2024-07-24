@@ -2,8 +2,17 @@ import React from "react";
 import RequestCounter from "./RequestCounter";
 import FormBtn from "./FormBtn";
 import RequestCard from "./RequestCard";
+import useFetch from "../hooks/useFetch";
+import { useQuery } from "@tanstack/react-query";
 
 const Main = () => {
+  const usingFetch = useFetch();
+
+  const { isSuccess, isError, error, isFetching, data } = useQuery({
+    queryKey: ["requests"],
+    queryFn: async () =>
+      await usingFetch("/api/requests", undefined, undefined, undefined),
+  });
   return (
     <div>
       <RequestCounter />
@@ -14,9 +23,21 @@ const Main = () => {
         <FormBtn>Want to help?</FormBtn>
         <FormBtn>Need help?</FormBtn>
       </div>
-      <div className="w-full px-10 py-20">
-        <RequestCard />
+      <div className="w-full px-10 py-20 flex flex-wrap gap-10">
+        {isSuccess &&
+          data.map((item) => {
+            return <RequestCard 
+            key={item.request_id}
+            title={item.title}
+            category={item.request_category}
+            username={item.username}
+            className=""
+            />;
+          })}
       </div>
+      {isFetching && <h1>Loading...</h1>}
+
+      {isError && <div>{error.message}</div>}
     </div>
   );
 };

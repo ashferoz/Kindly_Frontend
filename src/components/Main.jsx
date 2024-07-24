@@ -17,7 +17,7 @@ const Main = () => {
     <div>
       <div className="bg-[#ffc0cc] py-10">
         <RequestCounter />
-        <h3 className="font-epilogue text-5xl text-[#0753d8] text-center py-10 font-light italic">
+        <h3 className="font-epilogue text-4xl text-[#0753d8] text-center py-10 font-light italic">
           Give and receive help in your community.
         </h3>
         <div className="font-epilogue flex justify-center space-x-20">
@@ -25,7 +25,7 @@ const Main = () => {
           <FormBtn>Need help?</FormBtn>
         </div>
       </div>
-      <div className="w-full px-10 py-20 flex flex-wrap gap-10">
+      <div className="w-full px-10 py-20 flex flex-wrap gap-10 justify-center">
         {isSuccess &&
           data.map((item) => {
             return (

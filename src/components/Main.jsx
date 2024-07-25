@@ -19,7 +19,7 @@ const Main = () => {
 
   const handleCardClick = (request) => {
     setSelectRequest(request);
-    console.log(request.title);
+    console.log(request);
     setShowUpdateModal(true);
   };
 

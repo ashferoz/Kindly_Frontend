@@ -3,7 +3,7 @@ import FormBtn from "./FormBtn";
 
 const SignIn = () => {
   return (
-    <div className="flex items-center justify-center text-center min-h-screen">
+    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffc0cc]">
       <div>
         <h1 className="text-5xl mb-8">Welcome to Kindly!</h1>
         <p className="font-epilogue font-light">

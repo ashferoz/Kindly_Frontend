@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import RequestCounter from "./RequestCounter";
-import FormBtn from "./FormBtn";
-import RequestCard from "./RequestCard";
+import RequestCounter from "../components/RequestCounter";
+import FormBtn from "../components/FormBtn";
+import RequestCard from "../components/RequestCard";
 import useFetch from "../hooks/useFetch";
 import { useQuery } from "@tanstack/react-query";
-import RequestModal from "./RequestModal";
+import RequestModal from "../components/RequestModal";
 
 const Main = () => {
   const usingFetch = useFetch();
@@ -33,7 +33,7 @@ const Main = () => {
       )}
       <div className="bg-[#ffc0cc] py-10">
         <RequestCounter />
-        <h3 className="font-epilogue text-4xl text-[#0753d8] text-center py-10 font-light italic">
+        <h3 className="font-epilogue text-4xl text-black text-center py-10 font-light italic">
           Give and receive help in your community.
         </h3>
         <div className="font-epilogue flex justify-center space-x-20">

@@ -1,5 +1,5 @@
 import React from "react";
-import FormBtn from "./FormBtn";
+import FormBtn from "../components/FormBtn";
 
 const SignIn = () => {
   return (

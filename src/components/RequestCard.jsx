@@ -11,7 +11,7 @@ const RequestCard = (props) => {
           <p className="text-white text-lg">{props.category}</p>
         </div>
         <div className="flex flex-col items-start text-left">
-          <h4 className="text-white text-md">{props.username}</h4>
+          <h4 className="text-white text-md font-epilogue">{props.username}</h4>
           <h4 className="text-white text-xl font-semibold">{props.title}</h4>
         </div>
       </div>

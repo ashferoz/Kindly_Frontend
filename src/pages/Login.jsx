@@ -29,7 +29,7 @@ const Login = () => {
           userCtx.setAccessToken(data.access);
           const decoded = jwtDecode(data.access);
         //   userCtx.setRole(decoded.role);
-        navigate('/main');
+        navigate('/profile');
         }
       }, [data]);
       

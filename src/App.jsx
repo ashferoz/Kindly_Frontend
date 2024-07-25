@@ -4,10 +4,11 @@ import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-
+import Profile from "./pages/Profile";
 const queryClient = new QueryClient();
+
 function App() {
   return (
     <>
@@ -18,7 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Navigate replace to="/main" />} />
               <Route path="/main" element={<Main />} />
-              <Route path="/profile" />
+              <Route path="/profile" element={<Profile />}/>
               <Route path="/inbox" />
             </Routes>
           </Suspense>

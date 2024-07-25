@@ -14,7 +14,7 @@ const Main = () => {
   const { isSuccess, isError, error, isFetching, data } = useQuery({
     queryKey: ["requests"],
     queryFn: async () =>
-      await usingFetch("/api/requests", undefined, undefined, undefined),
+      await usingFetch("/api/requests", "GET", undefined, undefined),
   });
 
   const handleCardClick = (request) => {

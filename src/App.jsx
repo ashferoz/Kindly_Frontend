@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Main from "./components/Main";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 const queryClient = new QueryClient();
 function App() {
@@ -11,7 +12,8 @@ function App() {
         <div className="font-fraunces">
           {/* <Main /> */}
           {/* <SignIn /> */}
-          <Register />
+          {/* <Register /> */}
+          <Login />
         </div>
       </QueryClientProvider>
     </>

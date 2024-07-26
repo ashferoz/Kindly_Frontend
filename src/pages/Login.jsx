@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
-import userContext from "../contexts/user";
-import { useQuery } from "@tanstack/react-query";
+import UserContext from "../contexts/user";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const usingFetch = useFetch();
-  const userCtx = useContext(userContext);
+  const userCtx = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
 
   const { isError, error, data, refetch } = useQuery({
     queryKey: ["login"],
@@ -29,12 +30,15 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(userCtx.setAccessToken(data.access))
       userCtx.setAccessToken(data.access);
+      userCtx.setUserUUID(data.user.uuid); 
       const decoded = jwtDecode(data.access);
-      //   userCtx.setRole(decoded.role);
+      // userCtx.setRole(decoded.role);
       navigate("/profile");
     }
   }, [data]);
+  
 
   return (
     <div className="flex items-center justify-center text-center min-h-screen bg-[#ffc0cc] font-epilogue">

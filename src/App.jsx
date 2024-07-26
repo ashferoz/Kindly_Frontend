@@ -9,15 +9,19 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import UserContext from "./contexts/user";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
+
 const queryClient = new QueryClient();
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
+  const [userUUID, setUserUUID] = useState("");
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <UserContext.Provider value={{ accessToken, setAccessToken }}>
+        <UserContext.Provider
+          value={{ accessToken, setAccessToken, setUserUUID, userUUID }}
+        >
           <div className="font-fraunces">
             <Navbar />
             <Suspense fallback={<p>Loading...</p>}>
@@ -27,10 +31,10 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/signin" element={<SignIn />} />
-              <Route element={<ProtectedRoutes />}>
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/inbox"  />
-              </Route>
+                <Route element={<ProtectedRoutes />}>
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/inbox" />
+                </Route>
               </Routes>
             </Suspense>
           </div>

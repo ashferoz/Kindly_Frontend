@@ -49,9 +49,9 @@ const Profile = () => {
   return (
     <div>
       {userIsSuccess &&
-        data.map((item) => {
+        userData.map((item) => {
           return (
-            <div className="pl-20 pt-20 pr-20 pb-10">
+            <div key={item.uuid} className="pl-20 pt-20 pr-20 pb-10">
               <h1 className="text-4xl mb-5">Hello, {item.username}!</h1>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl font-epilogue mb-5">
                 location

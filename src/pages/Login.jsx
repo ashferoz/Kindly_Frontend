@@ -30,7 +30,6 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(userCtx.setAccessToken(data.access))
       userCtx.setAccessToken(data.access);
       userCtx.setUserUUID(data.user.uuid); 
       const decoded = jwtDecode(data.access);

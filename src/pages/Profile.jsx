@@ -3,10 +3,13 @@ import RequestCard from "../components/RequestCard";
 import UserContext from "../contexts/user";
 import useFetch from "../hooks/useFetch";
 import { useQuery } from "@tanstack/react-query";
+import RequestModal from "../components/RequestModal";
 
 const Profile = () => {
   const userCtx = useContext(UserContext);
   const usingFetch = useFetch();
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [selectRequest, setSelectRequest] = useState(null);
 
   const {
     isSuccess: userIsSuccess,
@@ -46,8 +49,20 @@ const Profile = () => {
       ),
   });
 
+  const handleCardClick = (request) => {
+    setSelectRequest(request);
+    console.log(request);
+    setShowUpdateModal(true);
+  };
+
   return (
     <div>
+      {showUpdateModal && (
+        <RequestModal
+          request={selectRequest}
+          setShowUpdateModal={setShowUpdateModal}
+        />
+      )}
       {userIsSuccess &&
         userData.map((item) => {
           return (

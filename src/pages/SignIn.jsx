@@ -1,7 +1,9 @@
 import React from "react";
 import FormBtn from "../components/FormBtn";
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex items-center justify-center text-center min-h-screen bg-[#ffc0cc]">
       <div>
@@ -12,8 +14,8 @@ const SignIn = () => {
           Together, let's build a network of kindness and support.
         </p>
         <div className="font-epilogue flex justify-center space-x-20 mt-10">
-          <FormBtn>Register</FormBtn>
-          <FormBtn>Login</FormBtn>
+          <FormBtn onClick={() => navigate('/register')}>Register</FormBtn>
+          <FormBtn onClick={() => navigate('/login')}>Login</FormBtn>
         </div>
       </div>
     </div>

@@ -25,6 +25,8 @@ function App() {
                 <Route path="/" element={<Navigate replace to="/main" />} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/signin" element={<SignIn />} />
               <Route element={<ProtectedRoutes />}>
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/inbox"  />

@@ -25,12 +25,16 @@ const UserRequestCard = (props) => {
   return (
     <>
       <div
-        className="w-[350px] h-[250px] bg-[#0753d8] flex flex-col justify-between p-4 font-epilogue"
+        className="w-[350px] h-auto bg-[#0753d8] flex flex-col justify-between p-4 font-epilogue"
       >
        <div className="flex flex-col">
   <div className="flex">
     <div className="w-24 text-white text-md font-medium">Title:</div>
     <div className="flex-1 text-white text-md ">{props.title}</div>
+  </div>
+  <div className="flex">
+    <div className="w-24 text-white text-md font-medium">Details:</div>
+    <div className="flex-1 text-white text-md ">{props.details}</div>
   </div>
   <div className="flex">
     <div className="w-24 text-white text-md font-medium">Category:</div>

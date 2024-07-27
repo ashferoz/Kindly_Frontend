@@ -83,6 +83,7 @@ const Profile = () => {
                 key={item.request_id}
                 id={item.request_id}
                 title={item.title}
+                details={item.details}
                 category={item.request_category}
                 urgency={item.request_urgency}
                 location={item.request_location}

@@ -9,6 +9,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import UserContext from "./contexts/user";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
+import RequestForm from "./pages/RequestForm";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ function App() {
                 <Route element={<ProtectedRoutes />}>
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/inbox" />
+                  <Route path="/requestFrom" element={<RequestForm />} />
                 </Route>
               </Routes>
             </Suspense>

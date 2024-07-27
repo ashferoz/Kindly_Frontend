@@ -1,25 +1,7 @@
-import React, { useState } from "react";
-import useFetch from "../hooks/useFetch";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React from "react";
 import ReactDOM from "react-dom";
 
 const Overlay = (props) => {
-  const usingFetch = useFetch();
-  const queryClient = useQueryClient();
-
-  const { mutate: connect } = useMutation({
-    mutationFn: async () =>
-      await usingFetch(
-        "/api/requests/" + props.volunteer_id,
-        "PUT",
-        { volunteer_uuid },
-        undefined
-      ),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["requests"]);
-      props.setShowUpdateModal(false);
-    },
-  });
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
       <div className="bg-white w-[1000px] h-[600px] flex">
@@ -30,7 +12,7 @@ const Overlay = (props) => {
         <button
           className="bg-[#ee2626]"
           onClick={() => {
-            props.setShowUpdateModal(false);
+            props.setShowRequestModal(false);
           }}
         >
           close
@@ -66,7 +48,7 @@ const RequestModal = (props) => {
           urgency={props.request.urgency}
           location={props.request.location}
           volunteer_id={props.request.volunteer_id}
-          setShowUpdateModal={props.setShowUpdateModal}
+          setShowRequestModal={props.setShowRequestModal}
         />,
         document.querySelector("#root")
       )}

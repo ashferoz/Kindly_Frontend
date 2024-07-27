@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import RequestCard from "../components/RequestCard";
 import UserContext from "../contexts/user";
 import useFetch from "../hooks/useFetch";
 import { useQuery } from "@tanstack/react-query";
-import RequestModal from "../components/RequestModal";
+import UpdateRequestModal from "../components/UpdateRequestModal";
+import UserRequestCard from "../components/UserRequestCard";
 
 const Profile = () => {
   const userCtx = useContext(UserContext);
@@ -58,7 +58,7 @@ const Profile = () => {
   return (
     <div>
       {showUpdateModal && (
-        <RequestModal
+        <UpdateRequestModal
           request={selectRequest}
           setShowUpdateModal={setShowUpdateModal}
         />
@@ -66,30 +66,27 @@ const Profile = () => {
       {userIsSuccess &&
         userData.map((item) => {
           return (
-            <div key={item.uuid} className="pl-20 pt-20 pr-20 pb-10">
+            <div key={item.uuid} className="pl-20 pt-10 pr-20 pb-5">
               <h1 className="text-4xl mb-5">Hello, {item.username}!</h1>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl font-epilogue mb-5">
-                location
+                {item.location_id}
               </p>
-              <h2 className="text-2xl">Your requests</h2>
             </div>
           );
         })}
-
-      {userIsFetching && <h1>Loading...</h1>}
-      {userIsError && <div>{userError.message}</div>}
-
+      <h2 className="text-2xl pl-20 pb-10">Open requests</h2>
       <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
         {requestIsSuccess &&
           requestData.map((item) => {
             return (
-              <RequestCard
+              <UserRequestCard
                 key={item.request_id}
+                id={item.request_id}
                 title={item.title}
                 category={item.request_category}
                 urgency={item.request_urgency}
                 location={item.request_location}
-                username={item.username}
+                status={item.request_status}
                 onClick={() => handleCardClick(item)}
               />
             );
@@ -98,6 +95,10 @@ const Profile = () => {
 
         {requestIsError && <div>{requestError.message}</div>}
       </div>
+      <h2 className="text-2xl pl-20 pb-10">Closed requests</h2>
+
+      {userIsFetching && <h1>Loading...</h1>}
+      {userIsError && <div>{userError.message}</div>}
     </div>
   );
 };

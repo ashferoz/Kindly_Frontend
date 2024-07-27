@@ -8,7 +8,7 @@ import RequestModal from "../components/RequestModal";
 
 const Main = () => {
   const usingFetch = useFetch();
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showRequestModal, setShowRequestModal] = useState(false);
   const [selectRequest, setSelectRequest] = useState(null);
 
   const { isSuccess, isError, error, isFetching, data } = useQuery({
@@ -20,15 +20,15 @@ const Main = () => {
   const handleCardClick = (request) => {
     setSelectRequest(request);
     console.log(request);
-    setShowUpdateModal(true);
+    setShowRequestModal(true);
   };
 
   return (
     <div>
-      {showUpdateModal && (
+      {showRequestModal && (
         <RequestModal
           request={selectRequest}
-          setShowUpdateModal={setShowUpdateModal}
+          setShowRequestModal={setShowRequestModal}
         />
       )}
       <div className="bg-[#ffc0cc] py-10">

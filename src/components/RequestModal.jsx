@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom";
+import UserContext from "../contexts/user";
 
 const Overlay = (props) => {
+  const userCtx = useContext(UserContext)
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
       <div className="bg-white w-[1000px] h-[600px] flex">
@@ -29,7 +31,11 @@ const Overlay = (props) => {
           <h3>Details:</h3>
           <p>{props.details}</p>
         </div>
-        <button className="bg-[#eb5353] hover:bg-[#de5050] rounded-xl px-3 py-1 text-white">Help out</button>
+        {!userCtx.accessToken ? (
+  <button className="bg-[#eb5353] hover:bg-[#de5050] rounded-xl px-3 py-1 text-white">
+    Help out
+  </button>
+) : null}
         </div>
       </div>
     </div>

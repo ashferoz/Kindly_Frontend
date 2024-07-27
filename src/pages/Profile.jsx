@@ -11,7 +11,7 @@ const Profile = () => {
   const usingFetch = useFetch();
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectRequest, setSelectRequest] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     isSuccess: userIsSuccess,
@@ -68,7 +68,10 @@ const Profile = () => {
       {userIsSuccess &&
         userData.map((item) => {
           return (
-            <div key={item.uuid} className="ml-20 mt-10 pr-20 mb-7 flex items-center">
+            <div
+              key={item.uuid}
+              className="ml-20 mt-10 pr-20 mb-7 flex items-center"
+            >
               <h1 className="text-4xl">Hello, {item.username}!</h1>
               <p className="bg-[#ffc0cc] h-auto w-auto mx-4 px-3 rounded-3xl font-epilogue">
                 {item.location_id}
@@ -76,7 +79,12 @@ const Profile = () => {
             </div>
           );
         })}
-        <button onClick={()=> navigate('/requestFrom')} className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl ml-20 mb-3">Post a request</button>
+      <button
+        onClick={() => navigate("/requestFrom")}
+        className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl ml-20 mb-3"
+      >
+        Post a request
+      </button>
       <h2 className="text-2xl pl-20 pb-10">Open requests</h2>
       <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
         {requestIsSuccess &&

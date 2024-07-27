@@ -30,7 +30,7 @@ const RequestForm = () => {
       ),
     onSuccess: () => {
       queryClient.invalidateQueries(["userRequests"]);
-      navigate("/profile")
+      navigate(-1)
     },
   });
 

@@ -67,7 +67,7 @@ const Main = () => {
           )}
         </div>
       </div>
-      <div className="bg-[#f2e8cf] w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
+      <div className="bg-[#fff7e1] w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
         {isSuccess &&
           data.map((item) => {
             return (

@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 import UserContext from "../contexts/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useFetch from "../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 const Overlay = (props) => {
   const userCtx = useContext(UserContext);
   const usingFetch = useFetch();
   const queryClient = useQueryClient();
+  const navigate = useNavigate()
 
   const { mutate } = useMutation({
     mutationFn: async () =>
@@ -22,6 +24,14 @@ const Overlay = (props) => {
       props.setShowRequestModal(false);
     },
   });
+
+  const handleBtn = () => {
+    if (!userCtx.accessToken) {
+      navigate("/signin");
+    } else {
+      mutate();
+    }
+  };
 
   console.log(props.id)
 
@@ -62,9 +72,9 @@ const Overlay = (props) => {
             <h3>Details:</h3>
             <p>{props.details}</p>
           </div>
-          {userCtx.role === "BENEFICIARY" ? null : (
+          {userCtx.role === "BENEFICIARY" ? null  : (
             <button
-              onClick={mutate}
+              onClick={handleBtn}
               className="bg-[#eb5353] hover:bg-[#de5050] rounded-xl px-3 py-1 text-white"
             >
               Help out

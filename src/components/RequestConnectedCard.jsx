@@ -35,15 +35,19 @@ const RequestConnectedCard = (props) => {
           </div>
         </div>
         <div className="flex flex-col mt-5 justify-end">
-          <button
+            {props.status === 'OPEN' &&   <button
             className="bg-[#77a6b6]  m-1 rounded-md"
+            
+          >
+            Chat with {props.beneficiary_username}
+          </button>}
+          <button
+            className="bg-[#8cb369]  m-1 rounded-md"
             onClick={props.onClick}
           >
             Task complete
           </button>
-          <button className="bg-[#6a994e]  m-1 rounded-md">
-            Remove
-          </button>
+          <button className="bg-[#de8333]  m-1 rounded-md">Remove</button>
         </div>
       </div>
     </>

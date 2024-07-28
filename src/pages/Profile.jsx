@@ -56,62 +56,76 @@ const Profile = () => {
     console.log(request);
     setShowUpdateModal(true);
   };
-
   return (
     <div>
-      {showUpdateModal && (
-        <UpdateRequestModal
-          request={selectRequest}
-          setShowUpdateModal={setShowUpdateModal}
-        />
-      )}
-      {userIsSuccess &&
-        userData.map((item) => {
-          return (
-            <div
-              key={item.uuid}
-              className="ml-20 mt-10 pr-20 mb-7 flex items-center"
-            >
+    {showUpdateModal && (
+      <UpdateRequestModal
+        request={selectRequest}
+        setShowUpdateModal={setShowUpdateModal}
+      />
+    )}
+    {userIsSuccess &&
+      userData.map((item) => {
+        return (
+          <div key={item.uuid} className="ml-20 mt-10 pr-20 mb-7">
+            <div className="flex items-center">
               <h1 className="text-4xl">Hello, {item.username}!</h1>
-              <p className="bg-[#ffc0cc] h-auto w-auto mx-4 px-3 rounded-3xl font-epilogue">
-                {item.location_id}
-              </p>
+              {userCtx.role === "BENEFICIARY" && (
+                <p className="bg-[#ffc0cc] h-auto w-auto mx-4 px-3 rounded-3xl font-epilogue">
+                  {item.location_id}
+                </p>
+              )}
             </div>
+            {userCtx.role === "BENEFICIARY" ? (
+              <>
+                <button
+                  onClick={() => navigate("/requestFrom")}
+                  className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl mt-4 mb-3"
+                >
+                  Post a request
+                </button>
+                <h2 className="text-2xl mt-4">Open requests</h2>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl mt-4">Bio: {item.bio}</h2>
+                <h2 className="text-2xl mt-4">Ongoing</h2>
+              </>
+            )}
+          </div>
+        );
+      })}
+  
+    <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
+      {requestIsSuccess &&
+        requestData.map((item) => {
+          return (
+            <UserRequestCard
+              key={item.request_id}
+              id={item.request_id}
+              title={item.title}
+              details={item.details}
+              category={item.request_category}
+              urgency={item.request_urgency}
+              location={item.request_location}
+              status={item.request_status}
+              onClick={() => handleCardClick(item)}
+            />
           );
         })}
-      <button
-        onClick={() => navigate("/requestFrom")}
-        className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl ml-20 mb-3"
-      >
-        Post a request
-      </button>
-      <h2 className="text-2xl pl-20 pb-10">Open requests</h2>
-      <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
-        {requestIsSuccess &&
-          requestData.map((item) => {
-            return (
-              <UserRequestCard
-                key={item.request_id}
-                id={item.request_id}
-                title={item.title}
-                details={item.details}
-                category={item.request_category}
-                urgency={item.request_urgency}
-                location={item.request_location}
-                status={item.request_status}
-                onClick={() => handleCardClick(item)}
-              />
-            );
-          })}
-        {requestIsFetching && <h1>Loading...</h1>}
-
-        {requestIsError && <div>{requestError.message}</div>}
-      </div>
-      <h2 className="text-2xl pl-20 pb-10">Closed requests</h2>
-
-      {userIsFetching && <h1>Loading...</h1>}
-      {userIsError && <div>{userError.message}</div>}
+      {requestIsFetching && <h1>Loading...</h1>}
+  
+      {requestIsError && <div>{requestError.message}</div>}
     </div>
+  
+    {userCtx.role === "BENEFICIARY"? (
+      <h2 className="text-2xl pl-20 pb-10">Closed requests</h2>) :(<h2 className="text-2xl pl-20 pb-10">Requests you have helped with</h2>)
+    }
+  
+    {userIsFetching && <h1>Loading...</h1>}
+    {userIsError && <div>{userError.message}</div>}
+  </div>
+  
   );
 };
 

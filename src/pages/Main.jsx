@@ -37,8 +37,9 @@ const Main = () => {
       )}
       <div className="bg-[#ffc0cc] py-10">
         {userCtx.role === "BENEFICIARY" ? (
-          
-          <h1 className=" text-7xl text-black text-center py-10 font-bold italic">All Requests</h1>
+          <h1 className=" text-7xl text-black text-center py-10 font-bold italic">
+            All Requests
+          </h1>
         ) : (
           <>
             <RequestCounter />
@@ -58,7 +59,9 @@ const Main = () => {
                 Post a request
               </button>
             </>
-          ) : (
+          ) : null}
+
+          {!userCtx.accessToken && (
             <>
               <FormBtn onClick={() => navigate("/register")}>Register</FormBtn>
               <FormBtn onClick={() => navigate("/login")}>Login</FormBtn>

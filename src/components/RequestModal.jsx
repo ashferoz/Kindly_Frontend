@@ -1,9 +1,30 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import UserContext from "../contexts/user";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useFetch from "../hooks/useFetch";
 
 const Overlay = (props) => {
   const userCtx = useContext(UserContext);
+  const usingFetch = useFetch();
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/requests/" + props.id,
+        "PUT",
+        {volunteer_uuid : userCtx.userUUID},
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["requests"]);
+      props.setShowRequestModal(false);
+    },
+  });
+
+  console.log(props.id)
+
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
       <div className="bg-white w-[1000px] h-[600px] flex">
@@ -42,7 +63,10 @@ const Overlay = (props) => {
             <p>{props.details}</p>
           </div>
           {userCtx.role === "BENEFICIARY" ? null : (
-            <button className="bg-[#eb5353] hover:bg-[#de5050] rounded-xl px-3 py-1 text-white">
+            <button
+              onClick={mutate}
+              className="bg-[#eb5353] hover:bg-[#de5050] rounded-xl px-3 py-1 text-white"
+            >
               Help out
             </button>
           )}
@@ -57,6 +81,7 @@ const RequestModal = (props) => {
     <>
       {ReactDOM.createPortal(
         <Overlay
+          id={props.request.request_id}
           title={props.request.title}
           username={props.request.username}
           details={props.request.details}

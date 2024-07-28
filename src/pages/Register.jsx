@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FormBtn from "../components/FormBtn";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
@@ -128,20 +127,21 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <p className="text-left mx-5 mb-1">Bio</p>
+        {selectedRole === 'VOLUNTEER' ? ( <><p className="text-left mx-5 mb-1">Bio</p>
         <input
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           className="w-auto mx-5 mb-5 h-10 pl-3"
           type="text"
-        />
-        <p className="text-left mx-5 mb-1">Location</p>
-        <input
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="w-auto mx-5 mb-5 h-10 pl-3"
-          type="text"
-        />
+        /></>) : (<> <p className="text-left mx-5 mb-1">Location</p>
+          <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-auto mx-5 mb-5 h-10 pl-3"
+            type="text"
+          /></>)}
+        
+    
         <button
           onClick={mutate}
           className="bg-[#0753d8] text-white w-auto mx-5 text-s h-9 rounded-lg hover:bg-[#eb5353] active:bg-[#a54040] transition-colors duration-150 ease-in-out mb-8"

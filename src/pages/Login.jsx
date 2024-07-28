@@ -31,10 +31,11 @@ const Login = () => {
   useEffect(() => {
     if (data) {
       userCtx.setAccessToken(data.access);
-      userCtx.setUserUUID(data.user.uuid); 
       const decoded = jwtDecode(data.access);
-      // userCtx.setRole(decoded.role);
+      userCtx.setRole(decoded.role);
+      userCtx.setUserUUID(decoded.uuid); 
       navigate("/profile");
+      console.log(data)
     }
   }, [data]);
   

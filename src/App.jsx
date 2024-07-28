@@ -16,12 +16,20 @@ const queryClient = new QueryClient();
 function App() {
   const [accessToken, setAccessToken] = useState("");
   const [userUUID, setUserUUID] = useState("");
+  const [role, setRole] = useState("");
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <UserContext.Provider
-          value={{ accessToken, setAccessToken, setUserUUID, userUUID }}
+          value={{
+            accessToken,
+            setAccessToken,
+            setUserUUID,
+            userUUID,
+            role,
+            setRole,
+          }}
         >
           <div className="font-fraunces">
             <Navbar />

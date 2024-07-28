@@ -36,10 +36,18 @@ const Main = () => {
         />
       )}
       <div className="bg-[#ffc0cc] py-10">
-        <RequestCounter />
-        <h3 className="font-epilogue text-4xl text-black text-center py-10 font-light italic">
-          Give and receive help in your community.
-        </h3>
+        {userCtx.role === "BENEFICIARY" ? (
+          
+          <h1 className=" text-7xl text-black text-center py-10 font-bold italic">All Requests</h1>
+        ) : (
+          <>
+            <RequestCounter />
+            <h3 className="font-epilogue text-4xl text-black text-center py-10 font-light italic">
+              Give and receive help in your community.
+            </h3>
+          </>
+        )}
+
         <div className="font-epilogue flex justify-center space-x-20">
           {userCtx.role === "BENEFICIARY" ? (
             <>

@@ -60,8 +60,8 @@ const Main = () => {
             </>
           ) : (
             <>
-              <FormBtn>Want to help?</FormBtn>
-              <FormBtn>Need help?</FormBtn>
+              <FormBtn onClick={() => navigate("/register")}>Register</FormBtn>
+              <FormBtn onClick={() => navigate("/login")}>Login</FormBtn>
             </>
           )}
         </div>

@@ -19,27 +19,28 @@ const Register = () => {
 
   const { mutate } = useMutation({
     mutationFn: async () => {
-      usingFetch(
-        "/auth/register",
-        "PUT",
-        {
-          firstname,
-          lastname,
-          email,
-          username,
-          hashed_password: password,
-          role_id: selectedRole,
-          bio,
-          location_id: location,
-        },
-        undefined
-      );
+      const registerUser = {
+        firstname,
+        lastname,
+        email,
+        username,
+        hashed_password: password,
+        role_id: selectedRole,
+      };
+  
+      if (selectedRole === 'VOLUNTEER') {
+        registerUser.bio = bio;
+        registerUser.location_id = null;
+      }
+  
+      return await usingFetch("/auth/register", "PUT", registerUser, undefined);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["users"])
-      navigate('/login')
+      queryClient.invalidateQueries(["users"]);
+      navigate('/login');
     },
   });
+  
 
   return (
     <div className="flex items-center justify-center text-center min-h-screen bg-[#ffc0cc] font-epilogue">

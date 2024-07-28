@@ -41,7 +41,7 @@ const Login = () => {
   
 
   return (
-    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffc0cc] font-epilogue">
+    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffd5dc] font-epilogue">
       <div className="flex flex-col w-96">
         <h1 className="text-3xl font-bold font-fraunces mb-5">Login</h1>
         <input
@@ -60,7 +60,7 @@ const Login = () => {
         />
         <button
           onClick={refetch}
-          className="bg-[#0753d8] text-white w-auto text-s h-9 rounded-lg hover:bg-[#eb5353] active:bg-[#a54040] transition-colors duration-150 ease-in-out mb-5"
+          className="bg-[#386641] text-white w-auto text-s h-9 rounded-lg hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out mb-5"
         >
           Login
         </button>

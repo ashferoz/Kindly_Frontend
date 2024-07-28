@@ -57,7 +57,7 @@ const Profile = () => {
     setShowUpdateModal(true);
   };
   return (
-    <div>
+    <div className="bg-[#f2e8cf] h-full">
     {showUpdateModal && (
       <UpdateRequestModal
         request={selectRequest}
@@ -67,7 +67,7 @@ const Profile = () => {
     {userIsSuccess &&
       userData.map((item) => {
         return (
-          <div key={item.uuid} className="ml-20 mt-10 pr-20 mb-7">
+          <div key={item.uuid} className="ml-20 pt-10 pr-20 mb-7">
             <div className="flex items-center">
               <h1 className="text-4xl">Hello, {item.username}!</h1>
               {userCtx.role === "BENEFICIARY" && (
@@ -79,11 +79,11 @@ const Profile = () => {
             {userCtx.role === "BENEFICIARY" ? (
               <>
                 <button
-                  onClick={() => navigate("/requestFrom")}
-                  className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl mt-4 mb-3"
-                >
-                  Post a request
-                </button>
+                onClick={() => navigate("/requestFrom")}
+                className="bg-[#386641] text-white rounded-lg px-4 py-1 mt-4 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
+              >
+                Post a request
+              </button>
                 <h2 className="text-2xl mt-4">Open requests</h2>
               </>
             ) : (

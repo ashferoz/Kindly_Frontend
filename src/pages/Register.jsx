@@ -43,7 +43,7 @@ const Register = () => {
   
 
   return (
-    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffc0cc] font-epilogue">
+    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffd5dc] font-epilogue">
       <div className="flex flex-col mb-10">
         <h1 className="text-3xl font-bold font-fraunces mb-3">Register</h1>
         <h2 className="text-sm mb-5">
@@ -145,7 +145,7 @@ const Register = () => {
     
         <button
           onClick={mutate}
-          className="bg-[#0753d8] text-white w-auto mx-5 text-s h-9 rounded-lg hover:bg-[#eb5353] active:bg-[#a54040] transition-colors duration-150 ease-in-out mb-8"
+          className="bg-[#386641] text-white w-auto mx-5 text-s h-9 rounded-lg hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out mb-8"
         >
           Register
         </button>

@@ -35,15 +35,13 @@ const Main = () => {
           setShowRequestModal={setShowRequestModal}
         />
       )}
-      <div className="bg-[#ffc0cc] py-10">
+      <div className="bg-[#6a994e] py-10">
         {userCtx.role === "BENEFICIARY" ? (
-          <h1 className=" text-7xl text-black text-center py-10 font-bold italic">
-            All Requests
-          </h1>
+          null
         ) : (
           <>
             <RequestCounter />
-            <h3 className="font-epilogue text-4xl text-black text-center py-10 font-light italic">
+            <h3 className="font-epilogue text-4xl text-[#f2e8cf] text-center py-5 font-light italic">
               Give and receive help in your community.
             </h3>
           </>
@@ -54,7 +52,7 @@ const Main = () => {
             <>
               <button
                 onClick={() => navigate("/requestFrom")}
-                className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl "
+                className="bg-[#386641] text-white rounded-lg px-4 py-1 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
               >
                 Post a request
               </button>
@@ -69,7 +67,7 @@ const Main = () => {
           )}
         </div>
       </div>
-      <div className="w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
+      <div className="bg-[#f2e8cf] w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
         {isSuccess &&
           data.map((item) => {
             return (

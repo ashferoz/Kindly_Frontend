@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
   const navigate = useNavigate()
   return (
-    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffc0cc]">
+    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffd5dc]">
       <div>
-        <h1 className="text-5xl mb-8">Welcome to Kindly!</h1>
+        <h1 className="text-5xl mb-8 text-[#386641]">Welcome to Kindly!</h1>
         <p className="font-epilogue font-light">
           Connect with volunteers and find the help you need or lend a hand to
           those in your community. <br />

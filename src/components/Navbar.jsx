@@ -3,16 +3,16 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="bg-[#ffc0cc] flex ">
-      <nav className="w-full border-b-2 border-[#fca7b762]">
+    <header className="bg-[#6a994e] flex">
+      <nav className="w-full border-b-2 border-[#639248]">
         <ul className="flex justify-center space-x-60 p-4">
           <li>
             <NavLink
               to="/main"
               className={({ isActive }) =>
                 `border-b-2 ${
-                  isActive ? "border-[#0753d8]" : "border-transparent"
-                } hover:border-[#0753d8] transition-colors duration-300`
+                  isActive ? "border-[#386641]" : "border-transparent"
+                } hover:border-[#386641] transition-colors duration-300`
               }
             >
               Main
@@ -24,8 +24,8 @@ const Navbar = () => {
               to="/inbox"
               className={({ isActive }) =>
                 `border-b-2 ${
-                  isActive ? "border-[#0753d8]" : "border-transparent"
-                } hover:border-[#0753d8] transition-colors duration-300`
+                  isActive ? "border-[#386641]" : "border-transparent"
+                } hover:border-[#386641] transition-colors duration-300`
               }
             >
               Inbox
@@ -37,8 +37,8 @@ const Navbar = () => {
               to="/profile"
               className={({ isActive }) =>
                 `border-b-2 ${
-                  isActive ? "border-[#0753d8]" : "border-transparent"
-                } hover:border-[#0753d8] transition-colors duration-300`
+                  isActive ? "border-[#386641]" : "border-transparent"
+                } hover:border-[#386641] transition-colors duration-300`
               }
             >
               Profile

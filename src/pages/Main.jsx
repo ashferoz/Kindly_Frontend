@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const Main = () => {
   const usingFetch = useFetch();
   const userCtx = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [selectRequest, setSelectRequest] = useState(null);
 
@@ -41,20 +41,20 @@ const Main = () => {
           Give and receive help in your community.
         </h3>
         <div className="font-epilogue flex justify-center space-x-20">
-          {!userCtx.accessToken ? (
+          {userCtx.role === "BENEFICIARY" ? (
+            <>
+              <button
+                onClick={() => navigate("/requestFrom")}
+                className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl "
+              >
+                Post a request
+              </button>
+            </>
+          ) : (
             <>
               <FormBtn>Want to help?</FormBtn>
               <FormBtn>Need help?</FormBtn>
             </>
-          ) : (
-
-            <button
-              onClick={() => navigate("/requestFrom")}
-              className="bg-[#0753d8] text-white rounded-lg px-2 font-medium text-xl "
-            >
-              Post a request
-            </button>
-            
           )}
         </div>
       </div>

@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../contexts/user";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import ConnectionSideBarCard from "../components/ConnectionSideBarCard";
 
 const Connections = () => {
   const usingFetch = useFetch();
   const userCtx = useContext(UserContext);
   const [selectRequest, setSelectRequest] = useState(null);
-  const [showRequestCard, setShowRequestCard] = useState(null);
 
   const {
     isSuccess: requestConnectIsSuccess,
@@ -29,13 +28,19 @@ const Connections = () => {
       ),
   });
 
-  const handleCollectionBtn = (request) => {
-    setSelectRequest(request);
-    console.log(request);
-    setShowRequestCard(true);
-  };
-
-  console.log(selectRequest);
+  const { mutate } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/requests/" + selectRequest.requestId,
+        "PATCH",
+        { request_status: "ON_GOING" },
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["userRequests"]);
+      props.setShowUpdateModal(false);
+    },
+  });
 
   return (
     <>
@@ -54,10 +59,14 @@ const Connections = () => {
                   location={item.request_location}
                   status={item.request_status}
                   username={item.beneficiary_username}
-                  setSelectRequest = {setSelectRequest}
+                  setSelectRequest={setSelectRequest}
                 />
               );
             })}
+
+          {requestConnectIsFetching && <h1>Loading...</h1>}
+
+          {requestConnectIsError && <div>{requestConnectError.message}</div>}
         </div>
 
         <div className="w-3/5 h-full flex flex-col justify-between font-epilogue">
@@ -74,7 +83,20 @@ const Connections = () => {
             </div>
           )}
           <div className="flex flex-col justify-end px-1 bg-white">
-            <button className="bg-[#8cb369] my-1">Accept Request</button>
+            {selectRequest && selectRequest.status === "OPEN" && (
+              <button onClick={mutate} className="bg-[#8cb369] my-1">
+                Accept Request
+              </button>
+            )}
+
+            {selectRequest && selectRequest.status === "ON_GOING" && (
+              <button className="bg-[#8cb369] my-1">Request Completed</button>
+            )}
+
+            {selectRequest && selectRequest.status === "COMPLETE" && (
+              <p>This request is closed. Delete connection if no longer needed.</p>
+            )}
+
             <button className="bg-[#8cb369] my-1">Delete Connection</button>
             <div className="flex">
               <input type="text" className="border-2 w-full mr-2" />

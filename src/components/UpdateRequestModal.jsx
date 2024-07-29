@@ -20,7 +20,7 @@ const Overlay = (props) => {
       await usingFetch(
         "/api/requests/" + props.id,
         "PATCH",
-        { title, details, category, urgency, location, status },
+        { title, details, request_category : category, request_urgency : urgency, request_location : location, request_status : status },
         userCtx.accessToken
       ),
     onSuccess: () => {
@@ -28,7 +28,7 @@ const Overlay = (props) => {
       props.setShowUpdateModal(false);
     },
   });
-  
+  console.log(props.id)
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">

@@ -6,9 +6,9 @@ import ConnectionSideBarCard from "../components/ConnectionSideBarCard";
 
 const Connections = () => {
   const usingFetch = useFetch();
-  const userCtx = useContext(UserContext)
+  const userCtx = useContext(UserContext);
   const [selectRequest, setSelectRequest] = useState(null);
-  const [showRequestCard, setShowRequestCard] = useState(null)
+  const [showRequestCard, setShowRequestCard] = useState(null);
 
   const {
     isSuccess: requestConnectIsSuccess,
@@ -29,36 +29,50 @@ const Connections = () => {
       ),
   });
 
-  console.log(requestConnectData)
+  const handleCollectionBtn = (request) => {
+    setSelectRequest(request);
+    console.log(request);
+    setShowRequestCard(true);
+  };
+
+  console.log(selectRequest);
 
   return (
     <>
       <div className="bg-[#fff7e1] h-[90vh] w-[100vw] text-[#352a1f]  flex flex-wrap justify-center">
         <div className="w-1/4 h-full">
-        {requestConnectIsSuccess &&
-          requestConnectData.map((item) => {
-            return (
-              <ConnectionSideBarCard
-                key={item.connection_id}
-                requestId={item.request_id}
-                title={item.title}
-                details={item.details}
-                category={item.request_category}
-                urgency={item.request_urgency}
-                location={item.request_location}
-                status={item.request_status}
-                username={item.beneficiary_username}
-              />
-            );
-          })}
+          {requestConnectIsSuccess &&
+            requestConnectData.map((item) => {
+              return (
+                <ConnectionSideBarCard
+                  key={item.connection_id}
+                  requestId={item.request_id}
+                  title={item.title}
+                  details={item.details}
+                  category={item.request_category}
+                  urgency={item.request_urgency}
+                  location={item.request_location}
+                  status={item.request_status}
+                  username={item.beneficiary_username}
+                  setSelectRequest = {setSelectRequest}
+                />
+              );
+            })}
         </div>
-        <div className="w-3/5 h-full flex flex-col justify-end font-epilogue">
-        <div>
-          <h5>Details</h5>
-          <h5>Category</h5>
-          <h5>Location</h5>
-          <h5>Urgency</h5>
-        </div>
+
+        <div className="w-3/5 h-full flex flex-col justify-between font-epilogue">
+          {selectRequest && (
+            <div className="p-5">
+              <h4>{selectRequest.username}</h4>
+              <h5>Title: {selectRequest.title}</h5>
+              <h5>Details: {selectRequest.details} </h5>
+              <div className="flex">
+                <h5 className="mr-5">{selectRequest.category}</h5>
+                <h5 className="mx-5">{selectRequest.location}</h5>
+                <h5 className="mx-5">{selectRequest.urgency}</h5>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col justify-end px-1 bg-white">
             <button className="bg-[#8cb369] my-1">Accept Request</button>
             <button className="bg-[#8cb369] my-1">Delete Connection</button>

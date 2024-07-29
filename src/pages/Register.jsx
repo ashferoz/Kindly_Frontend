@@ -13,34 +13,32 @@ const Register = () => {
   const [bio, setBio] = useState("");
   const [location, setLocation] = useState("");
   const usingFetch = useFetch();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
       const registerUser = {
-        firstname,
-        lastname,
+        first_name: firstname,
+        last_name: lastname,
         email,
         username,
-        hashed_password: password,
-        role_id: selectedRole,
+        password,
+        role: selectedRole,
       };
-  
-      if (selectedRole === 'VOLUNTEER') {
+
+      if (selectedRole === "VOLUNTEER") {
         registerUser.bio = bio;
-        registerUser.location_id = null;
       }
-  
+
       return await usingFetch("/auth/register", "PUT", registerUser, undefined);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
-      navigate('/login');
+      navigate("/login");
     },
   });
-  
 
   return (
     <div className="flex items-center justify-center text-center min-h-screen bg-[#ffd5dc] font-epilogue">
@@ -128,21 +126,18 @@ const Register = () => {
             </div>
           </div>
         </div>
-        {selectedRole === 'VOLUNTEER' ? ( <><p className="text-left mx-5 mb-1">Bio</p>
-        <input
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          className="w-auto mx-5 mb-5 h-10 pl-3"
-          type="text"
-        /></>) : (<> <p className="text-left mx-5 mb-1">Location</p>
-          <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="w-auto mx-5 mb-5 h-10 pl-3"
-            type="text"
-          /></>)}
-        
-    
+        {selectedRole === "VOLUNTEER" && (
+          <>
+            <p className="text-left mx-5 mb-1">Bio</p>
+            <input
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              className="w-auto mx-5 mb-5 h-10 pl-3"
+              type="text"
+            />
+          </>
+        )}
+
         <button
           onClick={mutate}
           className="bg-[#386641] text-white w-auto mx-5 text-s h-9 rounded-lg hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out mb-8"

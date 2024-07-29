@@ -35,7 +35,7 @@ const Main = () => {
           setShowRequestModal={setShowRequestModal}
         />
       )}
-      <div className="bg-[#6a994e] py-10">
+      <div className="bg-[#6a994e] py-10 mt-14">
         {userCtx.role === "BENEFICIARY" ? (
           null
         ) : (
@@ -72,11 +72,11 @@ const Main = () => {
           data.map((item) => {
             return (
               <RequestCard
-                key={item.request_id}
+                key={item.id}
                 title={item.title}
-                category={item.request_category}
-                urgency={item.request_urgency}
-                location={item.request_location}
+                category={item.category}
+                urgency={item.urgency}
+                location={item.location}
                 username={item.username}
                 onClick={() => handleCardClick(item)}
               />

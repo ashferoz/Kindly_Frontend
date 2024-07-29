@@ -20,12 +20,12 @@ const RequestForm = () => {
       await usingFetch(
         "/api/requests",
         "PUT",
-        { user_uuid: userCtx.userUUID,
+        { beneficiary_uuid: userCtx.userUUID,
           title,
           details,
-          request_category: category,
-          request_urgency: urgency,
-          request_location: location },
+          category,
+          urgency,
+          location },
         userCtx.accessToken
       ),
     onSuccess: () => {

@@ -19,7 +19,7 @@ const Login = () => {
       try {
         return await usingFetch("/auth/login", "POST", {
           username,
-          hashed_password: password,
+         password,
         });
       } catch (error) {
         throw error.message;
@@ -34,7 +34,7 @@ const Login = () => {
       const decoded = jwtDecode(data.access);
       userCtx.setRole(decoded.role);
       userCtx.setUserUUID(decoded.uuid); 
-      navigate('/profile');
+      navigate('/main');
       console.log(data)
     }
   }, [data]);

@@ -20,7 +20,7 @@ const Overlay = (props) => {
       await usingFetch(
         "/api/requests/" + props.id,
         "PATCH",
-        { title, details, request_category : category, request_urgency : urgency, request_location : location, request_status : status },
+        { title, details, category, urgency, location, status },
         userCtx.accessToken
       ),
     onSuccess: () => {
@@ -101,6 +101,7 @@ const Overlay = (props) => {
 };
 
 const UpdateRequestModal = (props) => {
+  console.log(props)
   return (
     <>
       {ReactDOM.createPortal(
@@ -108,12 +109,12 @@ const UpdateRequestModal = (props) => {
           title={props.request.title}
           username={props.request.username}
           details={props.request.details}
-          status={props.request.request_status}
-          category={props.request.request_category}
-          urgency={props.request.request_urgency}
-          location={props.request.request_location}
-          volunteer_id={props.request.volunteer_id}
-          id={props.request.request_id}
+          status={props.request.status}
+          category={props.request.category}
+          urgency={props.request.urgency}
+          location={props.request.location}
+          // volunteer_id={props.request.volunteer_id}
+          id={props.request.id}
           setShowUpdateModal={props.setShowUpdateModal}
         />,
         document.querySelector("#root")

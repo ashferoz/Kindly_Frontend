@@ -21,6 +21,8 @@ const UserRequestCard = (props) => {
     },
   });
 
+  const status = props.status
+
   return (
     <>
       <div className="w-[350px] h-auto bg-[#9dc3c2] flex flex-col justify-between p-4 font-epilogue text-[#352a1f]">
@@ -35,19 +37,19 @@ const UserRequestCard = (props) => {
           </div>
           <div className="flex">
             <div className="w-24  text-md font-medium">Category:</div>
-            <div className="flex-1  text-md ">{props.category}</div>
+            <div className="flex-1  text-md ">{props.category.toLowerCase()}</div>
           </div>
           <div className="flex">
             <div className="w-24  text-md font-medium">Urgency:</div>
-            <div className="flex-1  text-md ">{props.urgency}</div>
+            <div className="flex-1  text-md ">{props.urgency.toLowerCase()}</div>
           </div>
           <div className="flex">
             <div className="w-24  text-md font-medium">Location:</div>
-            <div className="flex-1  text-md ">{props.location}</div>
+            <div className="flex-1  text-md ">{props.location.toLowerCase()}</div>
           </div>
           <div className="flex">
             <div className="w-24  text-md font-medium">Status:</div>
-            <div className="flex-1  text-md ">{props.status}</div>
+            <div className="flex-1  text-md ">{props.status.toLowerCase()}</div>
           </div>
         </div>
         <div className="flex flex-col justify-end">

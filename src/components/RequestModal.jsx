@@ -91,7 +91,7 @@ const RequestModal = (props) => {
     <>
       {ReactDOM.createPortal(
         <Overlay
-          id={props.request.request_id}
+          id={props.request.id}
           title={props.request.title}
           username={props.request.username}
           details={props.request.details}

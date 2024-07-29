@@ -46,7 +46,7 @@ const Profile = () => {
         "/api/requests/id",
         "POST",
         {
-          user_uuid: userCtx.userUUID,
+          beneficiary_uuid: userCtx.userUUID,
         },
         userCtx.accessToken
       ),
@@ -72,13 +72,14 @@ const Profile = () => {
   });
 
 
+
   const handleCardClick = (request) => {
     setSelectRequest(request);
     console.log(request);
     setShowUpdateModal(true);
   };
   return (
-    <div className="bg-[#fff7e1] h-full text-[#352a1f]">
+    <div className="bg-[#fff7e1] h-full text-[#352a1f] mt-14">
       {showUpdateModal && (
         <UpdateRequestModal
           request={selectRequest}
@@ -122,14 +123,14 @@ const Profile = () => {
           requestConnectData.map((item) => {
             return (
               <RequestConnectedCard
-                key={item.connection_id}
+                key={item.id}
                 requestId={item.request_id}
                 title={item.title}
                 details={item.details}
-                category={item.request_category}
-                urgency={item.request_urgency}
-                location={item.request_location}
-                status={item.request_status}
+                category={item.category}
+                urgency={item.urgency}
+                location={item.location}
+                status={item.status}
                 beneficiary_username={item.beneficiary_username}
               />
             );
@@ -144,14 +145,14 @@ const Profile = () => {
           requestData.map((item) => {
             return (
               <UserRequestCard
-                key={item.request_id}
-                id={item.request_id}
+                key={item.id}
+                id={item.id}
                 title={item.title}
                 details={item.details}
-                category={item.request_category}
-                urgency={item.request_urgency}
-                location={item.request_location}
-                status={item.request_status}
+                category={item.category}
+                urgency={item.urgency}
+                location={item.location}
+                status={item.status}
                 onClick={() => handleCardClick(item)}
               />
             );

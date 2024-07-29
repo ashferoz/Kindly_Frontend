@@ -34,7 +34,7 @@ const Connections = () => {
       await usingFetch(
         "/api/requests/" + selectRequest.requestId,
         "PATCH",
-        { request_status: "ON_GOING" },
+        { status: "ONGOING" },
         userCtx.accessToken
       ),
     onSuccess: () => {
@@ -42,22 +42,24 @@ const Connections = () => {
     },
   });
 
+  console.log(requestConnectData)
+
   return (
     <>
-      <div className="bg-[#fff7e1] h-[90vh] w-[100vw] text-[#352a1f]  flex flex-wrap justify-center">
+      <div className="bg-[#fff7e1] h-[90vh] w-[100vw] text-[#352a1f] mt-14 flex flex-wrap justify-center">
         <div className="w-1/4 h-full">
           {requestConnectIsSuccess &&
             requestConnectData.map((item) => {
               return (
                 <ConnectionSideBarCard
-                  key={item.connection_id}
+                  key={item.id}
                   requestId={item.request_id}
                   title={item.title}
                   details={item.details}
-                  category={item.request_category}
-                  urgency={item.request_urgency}
-                  location={item.request_location}
-                  status={item.request_status}
+                  category={item.category}
+                  urgency={item.urgency}
+                  location={item.location}
+                  status={item.status}
                   username={item.beneficiary_username}
                   setSelectRequest={setSelectRequest}
                 />
@@ -89,7 +91,7 @@ const Connections = () => {
               </button>
             )}
 
-            {selectRequest && selectRequest.status === "ON_GOING" && (
+            {selectRequest && selectRequest.status === "ONGOING" && (
               <button className="bg-[#8cb369] my-1">Request Completed</button>
             )}
 

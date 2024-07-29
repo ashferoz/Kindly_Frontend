@@ -34,7 +34,7 @@ const Login = () => {
       const decoded = jwtDecode(data.access);
       userCtx.setRole(decoded.role);
       userCtx.setUserUUID(decoded.uuid); 
-      navigate("/profile");
+      navigate('/profile');
       console.log(data)
     }
   }, [data]);

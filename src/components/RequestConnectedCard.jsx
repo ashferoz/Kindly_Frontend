@@ -45,9 +45,9 @@ const RequestConnectedCard = (props) => {
             className="bg-[#8cb369]  m-1 rounded-md"
             onClick={props.onClick}
           >
-            Task complete
+            Mark complete
           </button>
-          <button className="bg-[#de8333]  m-1 rounded-md">Remove</button>
+          <button className="bg-[#de8333]  m-1 rounded-md">Cancel</button>
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import UserContext from "./contexts/user";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import RequestForm from "./pages/RequestForm";
+import Connections from "./pages/Connections";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +43,7 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route element={<ProtectedRoutes />}>
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/inbox" />
+                  <Route path="/inbox" element={<Connections />}/>
                   <Route path="/requestFrom" element={<RequestForm />} />
                 </Route>
               </Routes>

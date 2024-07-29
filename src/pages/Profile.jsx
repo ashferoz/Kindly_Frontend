@@ -110,7 +110,7 @@ const Profile = () => {
                 </>
               ) : (
                 <>
-                  <h2 className="text-2xl mt-4">Bio: {item.bio}</h2>
+                  <h2 className="text-2xl mt-4 font-epilogue">Bio: {item.bio} <span className="block text-sm italic">(this will be shown to beneficiaries)</span></h2>
                   <h2 className="text-2xl mt-4">Ongoing</h2>
                 </>
               )}

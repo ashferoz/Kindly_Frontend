@@ -13,10 +13,10 @@ const RequestConnectedCard = (props) => {
             <div className="w-28  text-md font-medium">Title:</div>
             <div className="flex-1  text-md ">{props.title}</div>
           </div>
-          <div className="flex">
+          {/* <div className="flex">
             <div className="w-28  text-md font-medium">Details:</div>
             <div className="flex-1  text-md ">{props.details}</div>
-          </div>
+          </div> */}
           <div className="flex">
             <div className="w-28  text-md font-medium">Category:</div>
             <div className="flex-1  text-md ">{props.category}</div>
@@ -41,13 +41,12 @@ const RequestConnectedCard = (props) => {
           >
             Chat with {props.beneficiary_username}
           </button>}
-          <button
+          {/* <button
             className="bg-[#8cb369]  m-1 rounded-md"
             onClick={props.onClick}
           >
             Mark complete
-          </button>
-          <button className="bg-[#de8333]  m-1 rounded-md">Cancel</button>
+          </button> */}
         </div>
       </div>
     </>

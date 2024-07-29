@@ -3,9 +3,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 import UserContext from '../contexts/user';
 
 const ProtectedRoutes = () => {
-  const { accessToken } = useContext(UserContext);
+  const userCtx = useContext(UserContext);
 
-  return accessToken ? <Outlet /> : <Navigate to="/signin" />;
+  return userCtx.accessToken ? <Outlet /> : <Navigate to="/signin" />;
 };
 
 export default ProtectedRoutes;

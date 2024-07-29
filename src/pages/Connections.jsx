@@ -29,7 +29,7 @@ const Connections = () => {
       ),
   });
 
-  const { mutate } = useMutation({
+  const { mutate : accept } = useMutation({
     mutationFn: async () =>
       await usingFetch(
         "/api/requests/" + selectRequest.requestId,
@@ -86,7 +86,7 @@ const Connections = () => {
           )}
           <div className="flex flex-col justify-end px-1 bg-white">
             {selectRequest && selectRequest.status === "OPEN" && (
-              <button onClick={mutate} className="bg-[#8cb369] my-1">
+              <button onClick={accept} className="bg-[#8cb369] my-1">
                 Accept Request
               </button>
             )}

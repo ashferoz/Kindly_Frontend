@@ -131,6 +131,7 @@ const Register = () => {
             <p className="text-left mx-5 mb-1">Bio</p>
             <input
               value={bio}
+              placeholder="Let beneficiaries know a bit about you"
               onChange={(e) => setBio(e.target.value)}
               className="w-auto mx-5 mb-5 h-10 pl-3"
               type="text"

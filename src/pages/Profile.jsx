@@ -163,7 +163,7 @@ const Profile = () => {
       </div>
 
       {userCtx.role === "BENEFICIARY" ? (
-        <h2 className="text-2xl pl-20 pb-10">Closed requests</h2>
+        <h2 className="text-2xl pl-20 pb-10">Completed requests</h2>
       ) : (
         <h2 className="text-2xl pl-20 pb-10">Requests you have helped with</h2>
       )}

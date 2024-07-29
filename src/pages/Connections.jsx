@@ -38,7 +38,28 @@ const Connections = () => {
         userCtx.accessToken
       ),
     onSuccess: () => {
+      setSelectRequest(prev => ({
+        ...prev,
+        status: "ONGOING",
+      }));
       queryClient.invalidateQueries(["requestConnections"])
+    },
+  });
+
+  const { mutate: complete } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/requests/" + selectRequest.requestId,
+        "PATCH",
+        { status: "COMPLETE" },
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      setSelectRequest(prev => ({
+        ...prev,
+        status: "COMPLETE",
+      }));
+      queryClient.invalidateQueries(["requestConnections"]);
     },
   });
 
@@ -92,7 +113,7 @@ const Connections = () => {
             )}
 
             {selectRequest && selectRequest.status === "ONGOING" && (
-              <button className="bg-[#8cb369] my-1">Request Completed</button>
+              <button onClick={complete} className="bg-[#8cb369] my-1">Request Completed</button>
             )}
 
             {selectRequest && selectRequest.status === "COMPLETE" && (

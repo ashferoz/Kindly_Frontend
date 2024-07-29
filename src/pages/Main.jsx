@@ -27,6 +27,10 @@ const Main = () => {
     setShowRequestModal(true);
   };
 
+  const completeCount = data
+    .filter((item) => item.status === "COMPLETE")
+    .length;
+
   return (
     <div>
       {showRequestModal && (
@@ -36,11 +40,10 @@ const Main = () => {
         />
       )}
       <div className="bg-[#6a994e] py-10 mt-14">
-        {userCtx.role === "BENEFICIARY" ? (
-          null
-        ) : (
+        {userCtx.role === "BENEFICIARY" ? null : (
           <>
-            <RequestCounter />
+            <RequestCounter count={completeCount} />
+
             <h3 className="font-epilogue text-4xl text-[#f2e8cf] text-center py-5 font-light italic">
               Give and receive help in your community.
             </h3>

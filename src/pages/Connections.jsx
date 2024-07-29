@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../contexts/user";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ConnectionSideBarCard from "../components/ConnectionSideBarCard";
 
 const Connections = () => {
   const usingFetch = useFetch();
   const userCtx = useContext(UserContext);
   const [selectRequest, setSelectRequest] = useState(null);
+  const queryClient = useQueryClient()
 
   const {
     isSuccess: requestConnectIsSuccess,
@@ -37,8 +38,7 @@ const Connections = () => {
         userCtx.accessToken
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries(["userRequests"]);
-      props.setShowUpdateModal(false);
+      queryClient.invalidateQueries(["requestConnections"])
     },
   });
 

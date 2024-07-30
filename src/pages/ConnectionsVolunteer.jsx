@@ -110,8 +110,7 @@ const ConnectionsVolunteer = () => {
         <div className="w-3/5 h-full flex flex-col justify-between font-epilogue">
           {selectRequest && (
             <div className="p-5">
-              <h4>{selectRequest.username}</h4>
-              <h5>Title: {selectRequest.title}</h5>
+              <h4>Username: {selectRequest.username}</h4>
               <h5>Details: {selectRequest.details} </h5>
               <div className="flex">
                 <h5 className="mr-5">{selectRequest.category}</h5>

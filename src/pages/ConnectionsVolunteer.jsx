@@ -63,7 +63,21 @@ const ConnectionsVolunteer = () => {
     },
   });
 
-  console.log(requestConnectData)
+  const { mutate: remove } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/connection/" + selectRequest.connection_id,
+        "DELETE",
+        undefined,
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["requestConnections"]);
+
+    },
+  });
+
+  console.log(selectRequest)
 
   return (
     <>
@@ -73,7 +87,8 @@ const ConnectionsVolunteer = () => {
             requestConnectData.map((item) => {
               return (
                 <ConnectionSideBarCard
-                  key={item.id}
+                  key={item.connection_id}
+                  connection_id={item.connection_id}
                   requestId={item.request_id}
                   title={item.title}
                   details={item.details}
@@ -120,7 +135,7 @@ const ConnectionsVolunteer = () => {
               <p>This request is closed. Delete connection if no longer needed.</p>
             )}
 
-            <button className="bg-[#8cb369] my-1">Delete Connection</button>
+            <button onClick={remove} className="bg-[#8cb369] my-1">Delete Connection</button>
             <div className="flex">
               <input type="text" className="border-2 w-full mr-2" />
               <button className="bg-[#8cb369] px-2">Send</button>

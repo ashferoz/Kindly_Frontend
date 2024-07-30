@@ -8,7 +8,7 @@ const ConnectionsBeneficiary = () => {
   const usingFetch = useFetch();
   const userCtx = useContext(UserContext);
   const [selectRequest, setSelectRequest] = useState(null);
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const {
     isSuccess: requestConnectIsSuccess,
@@ -29,9 +29,9 @@ const ConnectionsBeneficiary = () => {
       ),
   });
 
-  console.log(requestConnectData)
+  console.log(requestConnectData);
 
-  const { mutate : update } = useMutation({
+  const { mutate: update } = useMutation({
     mutationFn: async () =>
       await usingFetch(
         "/api/requests/" + selectRequest.requestId,
@@ -40,18 +40,18 @@ const ConnectionsBeneficiary = () => {
         userCtx.accessToken
       ),
     onSuccess: () => {
-      setSelectRequest(prev => ({
+      setSelectRequest((prev) => ({
         ...prev,
         status: "OPEN",
       }));
-      queryClient.invalidateQueries(["requestConnections"])
+      queryClient.invalidateQueries(["requestConnections"]);
     },
   });
 
-  const { mutate : remove } = useMutation({
+  const { mutate: remove } = useMutation({
     mutationFn: async () =>
       await usingFetch(
-        "/api/connection/" + selectRequest.requestId,
+        "/api/connection/" + selectRequest.connection_id,
         "DELETE",
         undefined,
         userCtx.accessToken
@@ -62,15 +62,6 @@ const ConnectionsBeneficiary = () => {
   });
 
 
-  const handleButton = () => {
-    if (selectRequest) {
-      update();
-      // remove();
-    }
-  }
-
-  console.log(selectRequest)
-
   return (
     <>
       <div className="bg-[#fff7e1] h-[90vh] w-[100vw] text-[#352a1f] mt-14 flex flex-wrap justify-center">
@@ -80,6 +71,7 @@ const ConnectionsBeneficiary = () => {
               return (
                 <ConnectionSideBarCard
                   key={item.id}
+                  connection_id={item.connection_id}
                   requestId={item.request_id}
                   title={item.title}
                   details={item.details}
@@ -111,16 +103,22 @@ const ConnectionsBeneficiary = () => {
           )}
           <div className="flex flex-col justify-end px-1 bg-white">
             {selectRequest && selectRequest.status === "ONGOING" && (
-              <button onClick={ handleButton } className="bg-[#8cb369] my-1">
+              <button onClick={update} className="bg-[#8cb369] my-1">
                 Decline offer
               </button>
             )}
 
             {selectRequest && selectRequest.status === "COMPLETE" && (
-              <p>This request is closed. Delete  if no longer needed.</p>
+              <>
+                <p>
+                  This request is closed. Delete connection if no longer needed.
+                </p>
+              </>
             )}
 
-            <button onClick={ remove } className="bg-[#8cb369] my-1">Delete Connection</button>
+            <button onClick={remove} className="bg-[#8cb369] my-1">
+              Delete Connection
+            </button>
             <div className="flex">
               <input type="text" className="border-2 w-full mr-2" />
               <button className="bg-[#8cb369] px-2">Send</button>

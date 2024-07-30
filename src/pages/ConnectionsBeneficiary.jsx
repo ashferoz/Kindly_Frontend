@@ -31,39 +31,22 @@ const ConnectionsBeneficiary = () => {
 
   console.log(requestConnectData)
 
-  // const { mutate : accept } = useMutation({
-  //   mutationFn: async () =>
-  //     await usingFetch(
-  //       "/api/requests/" + selectRequest.requestId,
-  //       "PATCH",
-  //       { status: "ONGOING" },
-  //       userCtx.accessToken
-  //     ),
-  //   onSuccess: () => {
-  //     setSelectRequest(prev => ({
-  //       ...prev,
-  //       status: "ONGOING",
-  //     }));
-  //     queryClient.invalidateQueries(["requestConnections"])
-  //   },
-  // });
-
-  // const { mutate: complete } = useMutation({
-  //   mutationFn: async () =>
-  //     await usingFetch(
-  //       "/api/requests/" + selectRequest.requestId,
-  //       "PATCH",
-  //       { status: "COMPLETE" },
-  //       userCtx.accessToken
-  //     ),
-  //   onSuccess: () => {
-  //     setSelectRequest(prev => ({
-  //       ...prev,
-  //       status: "COMPLETE",
-  //     }));
-  //     queryClient.invalidateQueries(["requestConnections"]);
-  //   },
-  // });
+  const { mutate : remove } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/requests/" + selectRequest.requestId,
+        "PATCH",
+        { status: "ONGOING" },
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      setSelectRequest(prev => ({
+        ...prev,
+        status: "ONGOING",
+      }));
+      queryClient.invalidateQueries(["requestConnections"])
+    },
+  });
 
   console.log(requestConnectData)
 
@@ -83,7 +66,8 @@ const ConnectionsBeneficiary = () => {
                   urgency={item.urgency}
                   location={item.location}
                   status={item.status}
-                  username={item.beneficiary_username}
+                  usernameBeneficary={item.username}
+                  usernameVolunteer={item.volunteer_username}
                   setSelectRequest={setSelectRequest}
                 />
               );
@@ -97,25 +81,18 @@ const ConnectionsBeneficiary = () => {
         <div className="w-3/5 h-full flex flex-col justify-between font-epilogue">
           {selectRequest && (
             <div className="p-5">
-              <h4>{selectRequest.username}</h4>
-              <h5>Title: {selectRequest.title}</h5>
-              <h5>Details: {selectRequest.details} </h5>
+              <h4>{selectRequest.usernameVolunteer}</h4>
               <div className="flex">
-                <h5 className="mr-5">{selectRequest.category}</h5>
-                <h5 className="mx-5">{selectRequest.location}</h5>
+                <h5 className="mr-5">{selectRequest.location}</h5>
                 <h5 className="mx-5">{selectRequest.urgency}</h5>
               </div>
             </div>
           )}
           <div className="flex flex-col justify-end px-1 bg-white">
             {selectRequest && selectRequest.status === "OPEN" && (
-              <button  className="bg-[#8cb369] my-1">
-                Accept Request
+              <button onClick={remove} className="bg-[#8cb369] my-1">
+                Decline offer
               </button>
-            )}
-
-            {selectRequest && selectRequest.status === "ONGOING" && (
-              <button  className="bg-[#8cb369] my-1">Request Completed</button>
             )}
 
             {selectRequest && selectRequest.status === "COMPLETE" && (

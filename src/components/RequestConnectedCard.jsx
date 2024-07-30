@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const RequestConnectedCard = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <div className="w-[350px] h-auto bg-[#9dc3c2] flex flex-col justify-between p-4 font-epilogue text-[#352a1f]">
@@ -37,12 +37,14 @@ const RequestConnectedCard = (props) => {
           </div>
         </div>
         <div className="flex flex-col mt-5 justify-end">
-            {props.status === 'OPEN' &&   <button
-            className="bg-[#77a6b6]  m-1 rounded-md"
-            onClick={()=> navigate('/inbox')}
-          >
-            Chat with {props.beneficiary_username}
-          </button>}
+          {(props.status === "OPEN" || props.status === "ONGOING") && (
+            <button
+              className="bg-[#77a6b6] m-1 rounded-md"
+              onClick={() => navigate("/inbox")}
+            >
+              Chat with {props.beneficiary_username}
+            </button>
+          )}
           {/* <button
             className="bg-[#8cb369]  m-1 rounded-md"
             onClick={props.onClick}

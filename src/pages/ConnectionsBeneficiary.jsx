@@ -36,7 +36,7 @@ const ConnectionsBeneficiary = () => {
       await usingFetch(
         "/api/requests/" + selectRequest.requestId,
         "PATCH",
-        { status: "ONGOING" },
+        { status: "OPEN" },
         userCtx.accessToken
       ),
     onSuccess: () => {
@@ -61,16 +61,15 @@ const ConnectionsBeneficiary = () => {
     },
   });
 
-  console.log(selectRequest.requestId)
 
   const handleButton = () => {
     if (selectRequest) {
       update();
-      remove();
+      // remove();
     }
   }
 
-  console.log(requestConnectData)
+  console.log(selectRequest)
 
   return (
     <>
@@ -88,6 +87,7 @@ const ConnectionsBeneficiary = () => {
                   urgency={item.urgency}
                   location={item.location}
                   status={item.status}
+                  bio={item.bio}
                   usernameBeneficary={item.username}
                   usernameVolunteer={item.volunteer_username}
                   setSelectRequest={setSelectRequest}
@@ -103,15 +103,14 @@ const ConnectionsBeneficiary = () => {
         <div className="w-3/5 h-full flex flex-col justify-between font-epilogue">
           {selectRequest && (
             <div className="p-5">
-              <h4>{selectRequest.usernameVolunteer}</h4>
+              <h4>Username: {selectRequest.usernameVolunteer}</h4>
               <div className="flex">
-                <h5 className="mr-5">{selectRequest.location}</h5>
-                <h5 className="mx-5">{selectRequest.urgency}</h5>
+                <h5 className="mr-5">Bio: {selectRequest.bio}</h5>
               </div>
             </div>
           )}
           <div className="flex flex-col justify-end px-1 bg-white">
-            {selectRequest && selectRequest.status === "OPEN" && (
+            {selectRequest && selectRequest.status === "ONGOING" && (
               <button onClick={ handleButton } className="bg-[#8cb369] my-1">
                 Decline offer
               </button>

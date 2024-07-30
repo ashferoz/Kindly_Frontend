@@ -129,13 +129,20 @@ const Register = () => {
         {selectedRole === "VOLUNTEER" && (
           <>
             <p className="text-left mx-5 mb-1">Bio</p>
-            <input
+            <textarea
+              className="w-auto mx-5 mb-5 h-20 p-3"
+              rows="4"
+              cols="50"
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="Let beneficiaries know a bit about you"
+            />
+            {/* <input
               value={bio}
               placeholder="Let beneficiaries know a bit about you"
               onChange={(e) => setBio(e.target.value)}
               className="w-auto mx-5 mb-5 h-10 pl-3"
               type="text"
-            />
+            /> */}
           </>
         )}
 

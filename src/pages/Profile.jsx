@@ -6,11 +6,13 @@ import UpdateRequestModal from "../components/UpdateRequestModal";
 import UserRequestCard from "../components/UserRequestCard";
 import { useNavigate } from "react-router-dom";
 import RequestConnectedCard from "../components/RequestConnectedCard";
+import UpdateUserModal from "../components/UpdateUserModal";
 
 const Profile = () => {
   const userCtx = useContext(UserContext);
   const usingFetch = useFetch();
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showUserUpdateModal, setShowUserUpdateModal] = useState(false);
   const [selectRequest, setSelectRequest] = useState(null);
   const navigate = useNavigate();
 
@@ -71,8 +73,6 @@ const Profile = () => {
       ),
   });
 
-  console.log(requestData);
-
   const handleCardClick = (request) => {
     setSelectRequest(request);
     console.log(request);
@@ -86,10 +86,28 @@ const Profile = () => {
           setShowUpdateModal={setShowUpdateModal}
         />
       )}
+
       {userIsSuccess &&
         userData.map((item) => {
           return (
             <div key={item.uuid} className="ml-20 pt-10 pr-20 mb-7">
+              {showUserUpdateModal && (
+                <UpdateUserModal
+                  firstName={item.first_name}
+                  lastName={item.last_name}
+                  username={item.username}
+                  email={item.email}
+                  password={item.password}
+                  bio={item.bio}
+                  setShowUserUpdateModal={setShowUserUpdateModal}
+                />
+              )}
+              <button
+                onClick={() => setShowUserUpdateModal(true)}
+                className="bg-[#386641] text-white rounded-lg fixed right-5 top-14 px-4 py-1 mt-4 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
+              >
+                Edit Profile
+              </button>
               <div className="flex items-center">
                 <h1 className="text-4xl">Hello, {item.username}!</h1>
                 {userCtx.role === "BENEFICIARY" && (
@@ -102,7 +120,7 @@ const Profile = () => {
                 <>
                   <button
                     onClick={() => navigate("/requestFrom")}
-                    className="bg-[#386641] text-white rounded-lg px-4 py-1 mt-4 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
+                    className="bg-[#386641] text-white rounded-lg mr-5 px-4 py-1 mt-4 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
                   >
                     Post a request
                   </button>

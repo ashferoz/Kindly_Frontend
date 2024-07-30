@@ -35,8 +35,6 @@ const Main = () => {
     setShowRequestModal(true);
   };
 
-  console.log(openRequests)
-
   return (
     <div>
       {showRequestModal && (

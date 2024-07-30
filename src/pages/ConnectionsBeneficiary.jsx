@@ -61,6 +61,8 @@ const ConnectionsBeneficiary = () => {
     },
   });
 
+  console.log(requestConnectData)
+
 
   return (
     <>

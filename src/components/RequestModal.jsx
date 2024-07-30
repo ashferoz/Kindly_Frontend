@@ -9,19 +9,23 @@ const Overlay = (props) => {
   const userCtx = useContext(UserContext);
   const usingFetch = useFetch();
   const queryClient = useQueryClient();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: async () =>
       await usingFetch(
         "/api/requests/" + props.id,
         "PUT",
-        {volunteer_uuid : userCtx.userUUID, beneficiary_uuid: props.beneficiary_uuid},
+        {
+          volunteer_uuid: userCtx.userUUID,
+          beneficiary_uuid: props.beneficiary_uuid,
+        },
         userCtx.accessToken
       ),
     onSuccess: () => {
       queryClient.invalidateQueries(["requests"]);
       props.setShowRequestModal(false);
+      navigate("/inbox");
     },
   });
 
@@ -33,7 +37,7 @@ const Overlay = (props) => {
     }
   };
 
-  console.log(props.beneficiary_uuid)
+  console.log(props.beneficiary_uuid);
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
@@ -72,7 +76,7 @@ const Overlay = (props) => {
             <h3>Details:</h3>
             <p>{props.details}</p>
           </div>
-          {userCtx.role === "BENEFICIARY" ? null  : (
+          {userCtx.role === "BENEFICIARY" ? null : (
             <button
               onClick={handleBtn}
               className="bg-[#eb5353] hover:bg-[#de5050] rounded-xl px-3 py-1 text-white"

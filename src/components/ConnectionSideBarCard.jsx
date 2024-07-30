@@ -3,7 +3,6 @@ import UserContext from "../contexts/user";
 
 const ConnectionSideBarCard = (props) => {
   const userCtx = useContext(UserContext);
-  console.log(props)
   return (
 
     <>

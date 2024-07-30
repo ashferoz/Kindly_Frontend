@@ -28,7 +28,6 @@ const Overlay = (props) => {
       props.setShowUpdateModal(false);
     },
   });
-  console.log(props.id)
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
@@ -101,7 +100,6 @@ const Overlay = (props) => {
 };
 
 const UpdateRequestModal = (props) => {
-  console.log(props)
   return (
     <>
       {ReactDOM.createPortal(
@@ -113,7 +111,6 @@ const UpdateRequestModal = (props) => {
           category={props.request.category}
           urgency={props.request.urgency}
           location={props.request.location}
-          // volunteer_id={props.request.volunteer_id}
           id={props.request.id}
           setShowUpdateModal={props.setShowUpdateModal}
         />,

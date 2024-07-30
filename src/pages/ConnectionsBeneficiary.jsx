@@ -29,8 +29,6 @@ const ConnectionsBeneficiary = () => {
       ),
   });
 
-  console.log(requestConnectData);
-
   const { mutate: update } = useMutation({
     mutationFn: async () =>
       await usingFetch(
@@ -60,9 +58,6 @@ const ConnectionsBeneficiary = () => {
       queryClient.invalidateQueries(["requestConnections"]);
     },
   });
-
-  console.log(requestConnectData)
-
 
   return (
     <>

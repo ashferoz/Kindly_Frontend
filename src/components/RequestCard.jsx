@@ -1,7 +1,6 @@
 import React from "react";
 
 const RequestCard = (props) => {
-  console.log(props)
   return (
     <>
     <div

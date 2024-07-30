@@ -37,8 +37,6 @@ const Overlay = (props) => {
     }
   };
 
-  console.log(props.beneficiary_uuid);
-
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
       <div className="bg-white w-[1000px] h-[600px] flex">

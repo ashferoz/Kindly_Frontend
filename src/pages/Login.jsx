@@ -35,7 +35,6 @@ const Login = () => {
       userCtx.setRole(decoded.role);
       userCtx.setUserUUID(decoded.uuid); 
       navigate('/main');
-      console.log(data)
     }
   }, [data]);
   

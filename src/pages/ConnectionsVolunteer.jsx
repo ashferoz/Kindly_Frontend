@@ -77,8 +77,6 @@ const ConnectionsVolunteer = () => {
     },
   });
 
-  console.log(selectRequest)
-
   return (
     <>
       <div className="bg-[#fff7e1] h-[90vh] w-[100vw] text-[#352a1f] mt-14 flex flex-wrap justify-center">

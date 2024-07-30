@@ -75,7 +75,6 @@ const Profile = () => {
 
   const handleCardClick = (request) => {
     setSelectRequest(request);
-    console.log(request);
     setShowUpdateModal(true);
   };
   return (

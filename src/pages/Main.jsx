@@ -31,7 +31,6 @@ const Main = () => {
 
   const handleCardClick = (request) => {
     setSelectRequest(request);
-    console.log(request);
     setShowRequestModal(true);
   };
 

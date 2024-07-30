@@ -42,13 +42,13 @@ const Main = () => {
           setShowRequestModal={setShowRequestModal}
         />
       )}
-      <div className="bg-[#6a994e] py-10 mt-14">
+      <div className="bg-[#d1b9e5] py-10 mt-14 text-[#0753d8]">
         {userCtx.role === "BENEFICIARY" ? null : (
           <>
             <RequestCounter count={completeCount} />
 
-            <h3 className="font-epilogue text-4xl text-[#f2e8cf] text-center py-5 font-light italic">
-              Give and receive help in your community.
+            <h3 className="font-epilogue text-4xl text-center py-5 font-light">
+              <span className="font-medium">Give</span> and <span className="font-medium">receive</span> help in your community.
             </h3>
           </>
         )}
@@ -73,7 +73,7 @@ const Main = () => {
           )}
         </div>
       </div>
-      <div className="bg-[#fff7e1] w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
+      <div className="bg-[#fffae1] w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
         {isSuccess &&
           openRequests.map((item) => (
             <RequestCard

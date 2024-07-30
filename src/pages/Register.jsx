@@ -41,7 +41,7 @@ const Register = () => {
   });
 
   return (
-    <div className="flex items-center justify-center text-center min-h-screen bg-[#ffd5dc] font-epilogue">
+    <div className="flex items-center justify-center text-center min-h-screen pt-20 bg-[#ffdee4] font-epilogue text-[#373737]">
       <div className="flex flex-col mb-10">
         <h1 className="text-3xl font-bold font-fraunces mb-3">Register</h1>
         <h2 className="text-sm mb-5">
@@ -134,21 +134,14 @@ const Register = () => {
               rows="4"
               cols="50"
               onChange={(e) => setBio(e.target.value)}
-              placeholder="Let beneficiaries know a bit about you"
+              placeholder="Let beneficiaries know a little bit about you."
             />
-            {/* <input
-              value={bio}
-              placeholder="Let beneficiaries know a bit about you"
-              onChange={(e) => setBio(e.target.value)}
-              className="w-auto mx-5 mb-5 h-10 pl-3"
-              type="text"
-            /> */}
           </>
         )}
 
         <button
           onClick={mutate}
-          className="bg-[#386641] text-white w-auto mx-5 text-s h-9 rounded-lg hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out mb-8"
+          className="hover:bg-[#4d7aff] bg-[#0753d8] text-white w-auto mx-5 text-s h-9 rounded-lg transition-colors duration-200 ease-in-out mb-8"
         >
           Register
         </button>

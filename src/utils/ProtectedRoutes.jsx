@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import UserContext from '../contexts/user';
 
 const ProtectedRoutes = () => {
   const userCtx = useContext(UserContext);
+  const navigate = useNavigate()
 
-  if (!userCtx.accessToken) {
-    return <Navigate to="/signin" />;
-  }
+  useEffect(() => {
+    if (!userCtx.accessToken) {
+      navigate('/signin');
+    }
+  }, [userCtx.accessToken, navigate]);
 
   return <Outlet />;
 };

@@ -61,8 +61,8 @@ const ConnectionsBeneficiary = () => {
 
   return (
     <>
-      <div className="bg-[#fff7e1] h-[90vh] w-[100vw] text-[#352a1f] mt-14 flex flex-wrap justify-center">
-        <div className="w-1/4 h-full">
+      <div className="bg-[#fffae1] h-[93vh] w-screen text-[#352a1f] mt-14 flex flex-wrap justify-between">
+        <div className="w-1/4 h-full overflow-y-auto bg-[#cfe0bf]">
           {requestConnectIsSuccess &&
             requestConnectData.map((item) => {
               return (
@@ -89,39 +89,65 @@ const ConnectionsBeneficiary = () => {
           {requestConnectIsError && <div>{requestConnectError.message}</div>}
         </div>
 
-        <div className="w-3/5 h-full flex flex-col justify-between font-epilogue">
-          {selectRequest && (
-            <div className="p-5">
-              <h4>Username: {selectRequest.usernameVolunteer}</h4>
-              <div className="flex">
-                <h5 className="mr-5">Bio: {selectRequest.bio}</h5>
+        {selectRequest ? (
+          <>
+            <div className="w-3/4 h-full flex flex-col justify-between font-epilogue">
+              <div className="p-5">
+                <h4>Username: {selectRequest.usernameVolunteer}</h4>
+                <div className="flex">
+                  <h5 className="mr-5">Bio: {selectRequest.bio}</h5>
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-end">
+                <div className="ml-3 mb-2">
+                  {selectRequest && selectRequest.status === "ONGOING" && (
+                    <button
+                      onClick={update}
+                      className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mx-2 my-1"
+                    >
+                      Decline offer
+                    </button>
+                  )}
+                  <button
+                    onClick={remove}
+                    className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mx-2 my-1"
+                  >
+                    Delete Connection
+                  </button>
+                </div>
+
+                {selectRequest && selectRequest.status === "COMPLETE" && (
+                  <>
+                    <p className="mx-5 mb-2 px-3 py-1 rounded-3xl text-sm bg-[#e96363] text-white">
+                      This request is closed. Delete connection if no longer
+                      needed.
+                    </p>
+                  </>
+                )}
+
+                <div className="flex mb-5 mx-5">
+                  <input type="text" className="border-2 w-full mr-2 p-1" />
+                  <button className="hover:bg-[#2fab5e] bg-[#32bf68] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2">
+                    Send
+                  </button>
+                </div>
               </div>
             </div>
-          )}
-          <div className="flex flex-col justify-end px-1 bg-white">
-            {selectRequest && selectRequest.status === "ONGOING" && (
-              <button onClick={update} className="bg-[#8cb369] my-1">
-                Decline offer
+          </>
+        ) : (
+          <div className="w-3/4 h-full flex flex-col justify-between font-epilogue">
+            <div className="flex flex-col items-center justify-center flex-grow text-center">
+              <p>No request selected</p>
+            </div>
+            <div className="flex mb-5 mx-5">
+              <input type="text" className="border-2 w-full mr-2 p-1" />
+              <button className="hover:bg-[#2fab5e] bg-[#32bf68] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2">
+                Send
               </button>
-            )}
-
-            {selectRequest && selectRequest.status === "COMPLETE" && (
-              <>
-                <p>
-                  This request is closed. Delete connection if no longer needed.
-                </p>
-              </>
-            )}
-
-            <button onClick={remove} className="bg-[#8cb369] my-1">
-              Delete Connection
-            </button>
-            <div className="flex">
-              <input type="text" className="border-2 w-full mr-2" />
-              <button className="bg-[#8cb369] px-2">Send</button>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -39,7 +39,7 @@ const RequestConnectedCard = (props) => {
         <div className="flex flex-col mt-5 justify-end">
           {(props.status === "OPEN" || props.status === "ONGOING") && (
             <button
-              className="bg-[#77a6b6] m-1 rounded-md"
+              className="bg-[#0753d8] text-white m-1 rounded-md"
               onClick={() => navigate("/inbox")}
             >
               Chat with {props.beneficiary_username}

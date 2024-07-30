@@ -78,7 +78,7 @@ const Profile = () => {
     setShowUpdateModal(true);
   };
   return (
-    <div className="bg-[#fff7e1] h-full text-[#352a1f] mt-14">
+    <div className="bg-[#fffdf7] h-full text-[#352a1f] mt-14">
       {showUpdateModal && (
         <UpdateRequestModal
           request={selectRequest}

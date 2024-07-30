@@ -39,7 +39,7 @@ const Overlay = (props) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
-      <div className="bg-white w-[1000px] h-[600px] flex">
+      <div className="bg-[#fffae1] w-[800px] h-[600px] text-[#373737] flex">
         <div className="w-2/5 h-full">
           <img
             className="object-cover w-full h-full"
@@ -47,20 +47,20 @@ const Overlay = (props) => {
             alt=""
           />
         </div>
-        <div className="w-3/5 p-8">
+        <div className="w-3/5 p-8 relative flex flex-col justify-between">
           <button
-            className="bg-[#ee2626]"
+            className="bg-[#eb5353] hover:bg-[#e96363] transition-colors duration-200 ease-in-out text-white px-2 py-1 absolute top-2 right-3"
             onClick={() => {
               props.setShowRequestModal(false);
             }}
           >
             close
           </button>
-          <div className="mx-8">
+          <div className="mx-8 h-full">
             <h1 className="text-5xl my-5 font-fraunces">{props.title}</h1>
             <h2 className="text-2xl my-1">{props.username}</h2>
             <hr className="mb-6" />
-            <div className="text-xs font-normal mb-5">
+            <div className="text-xs h-fit font-normal mb-5">
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
                 {props.urgency}
               </p>
@@ -75,12 +75,14 @@ const Overlay = (props) => {
             <p>{props.details}</p>
           </div>
           {userCtx.role === "BENEFICIARY" ? null : (
-            <button
-              onClick={handleBtn}
-              className="bg-[#eb5353] hover:bg-[#de5050] rounded-xl px-3 py-1 text-white"
-            >
-              Help out
-            </button>
+            <div className="flex mt-auto">
+              <button
+                onClick={handleBtn}
+                className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out px-3 py-1 text-white w-full"
+              >
+                Help out
+              </button>
+            </div>
           )}
         </div>
       </div>

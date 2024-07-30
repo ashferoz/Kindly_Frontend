@@ -4,7 +4,7 @@ import UserContext from "../contexts/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ConnectionSideBarCard from "../components/ConnectionSideBarCard";
 
-const ConnectionsBeneficiary = () => {
+const ConnectionsVolunteer = () => {
   const usingFetch = useFetch();
   const userCtx = useContext(UserContext);
   const [selectRequest, setSelectRequest] = useState(null);
@@ -20,50 +20,48 @@ const ConnectionsBeneficiary = () => {
     queryKey: ["requestConnections"],
     queryFn: async () =>
       await usingFetch(
-        "/api/connected/beneficiary",
+        "/api/connected/volunteer",
         "POST",
         {
-          beneficiary_uuid: userCtx.userUUID,
+          volunteer_uuid: userCtx.userUUID,
         },
         userCtx.accessToken
       ),
   });
 
-  console.log(requestConnectData)
+  const { mutate : accept } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/requests/" + selectRequest.requestId,
+        "PATCH",
+        { status: "ONGOING" },
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      setSelectRequest(prev => ({
+        ...prev,
+        status: "ONGOING",
+      }));
+      queryClient.invalidateQueries(["requestConnections"])
+    },
+  });
 
-  // const { mutate : accept } = useMutation({
-  //   mutationFn: async () =>
-  //     await usingFetch(
-  //       "/api/requests/" + selectRequest.requestId,
-  //       "PATCH",
-  //       { status: "ONGOING" },
-  //       userCtx.accessToken
-  //     ),
-  //   onSuccess: () => {
-  //     setSelectRequest(prev => ({
-  //       ...prev,
-  //       status: "ONGOING",
-  //     }));
-  //     queryClient.invalidateQueries(["requestConnections"])
-  //   },
-  // });
-
-  // const { mutate: complete } = useMutation({
-  //   mutationFn: async () =>
-  //     await usingFetch(
-  //       "/api/requests/" + selectRequest.requestId,
-  //       "PATCH",
-  //       { status: "COMPLETE" },
-  //       userCtx.accessToken
-  //     ),
-  //   onSuccess: () => {
-  //     setSelectRequest(prev => ({
-  //       ...prev,
-  //       status: "COMPLETE",
-  //     }));
-  //     queryClient.invalidateQueries(["requestConnections"]);
-  //   },
-  // });
+  const { mutate: complete } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/requests/" + selectRequest.requestId,
+        "PATCH",
+        { status: "COMPLETE" },
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      setSelectRequest(prev => ({
+        ...prev,
+        status: "COMPLETE",
+      }));
+      queryClient.invalidateQueries(["requestConnections"]);
+    },
+  });
 
   console.log(requestConnectData)
 
@@ -109,13 +107,13 @@ const ConnectionsBeneficiary = () => {
           )}
           <div className="flex flex-col justify-end px-1 bg-white">
             {selectRequest && selectRequest.status === "OPEN" && (
-              <button  className="bg-[#8cb369] my-1">
+              <button onClick={accept} className="bg-[#8cb369] my-1">
                 Accept Request
               </button>
             )}
 
             {selectRequest && selectRequest.status === "ONGOING" && (
-              <button  className="bg-[#8cb369] my-1">Request Completed</button>
+              <button onClick={complete} className="bg-[#8cb369] my-1">Request Completed</button>
             )}
 
             {selectRequest && selectRequest.status === "COMPLETE" && (
@@ -134,4 +132,4 @@ const ConnectionsBeneficiary = () => {
   );
 };
 
-export default ConnectionsBeneficiary;
+export default ConnectionsVolunteer;

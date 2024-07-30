@@ -21,15 +21,19 @@ const Main = () => {
       await usingFetch("/api/requests", "GET", undefined, undefined),
   });
 
+  const openRequests =
+    data?.filter(
+      (item) => item.status === "OPEN" || item.status === "ONGOING"
+    ) || [];
+    
+  const completeCount =
+    data?.filter((item) => item.status === "COMPLETE").length || 0;
+
   const handleCardClick = (request) => {
     setSelectRequest(request);
     console.log(request);
     setShowRequestModal(true);
   };
-
-  const completeCount = data
-    .filter((item) => item.status === "COMPLETE")
-    .length;
 
   return (
     <div>
@@ -72,23 +76,20 @@ const Main = () => {
       </div>
       <div className="bg-[#fff7e1] w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
         {isSuccess &&
-          data.map((item) => {
-            return (
-              <RequestCard
-                key={item.id}
-                title={item.title}
-                category={item.category}
-                urgency={item.urgency}
-                location={item.location}
-                username={item.username}
-                onClick={() => handleCardClick(item)}
-              />
-            );
-          })}
+          openRequests.map((item) => (
+            <RequestCard
+              key={item.id}
+              title={item.title}
+              category={item.category}
+              urgency={item.urgency}
+              location={item.location}
+              username={item.username}
+              onClick={() => handleCardClick(item)}
+            />
+          ))}
       </div>
 
       {isFetching && <h1>Loading...</h1>}
-
       {isError && <div>{error.message}</div>}
     </div>
   );

@@ -4,7 +4,7 @@ import UserContext from "../contexts/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ConnectionSideBarCard from "../components/ConnectionSideBarCard";
 
-const Connections = () => {
+const ConnectionsBeneficiary = () => {
   const usingFetch = useFetch();
   const userCtx = useContext(UserContext);
   const [selectRequest, setSelectRequest] = useState(null);
@@ -20,7 +20,7 @@ const Connections = () => {
     queryKey: ["requestConnections"],
     queryFn: async () =>
       await usingFetch(
-        "/api/requests/connected",
+        "/api/connected/volunteer",
         "POST",
         {
           volunteer_uuid: userCtx.userUUID,
@@ -132,4 +132,4 @@ const Connections = () => {
   );
 };
 
-export default Connections;
+export default ConnectionsBeneficiary;

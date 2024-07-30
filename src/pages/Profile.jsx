@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import UserContext from "../contexts/user";
 import useFetch from "../hooks/useFetch";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import UpdateRequestModal from "../components/UpdateRequestModal";
 import UserRequestCard from "../components/UserRequestCard";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ const Profile = () => {
     queryKey: ["requestConnections"],
     queryFn: async () =>
       await usingFetch(
-        "/api/requests/connected",
+        "/api/connected/volunteer",
         "POST",
         {
           volunteer_uuid: userCtx.userUUID,

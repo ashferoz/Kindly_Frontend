@@ -1,6 +1,7 @@
 import React from "react";
 
 const RequestCard = (props) => {
+  console.log(props)
   return (
     <>
     <div
@@ -14,10 +15,7 @@ const RequestCard = (props) => {
       alt=""
     />
   </div>
-  <div className="relative flex flex-col px-2 mb-3 h-[25%] z-10 bg-[#9dc3c2]">
-    <div className="flex-grow flex items-center justify-center p-2">
-      <p className="text-lg">{props.category}</p>
-    </div>
+  <div className="relative flex flex-col justify-center px-2 mb-3 h-[25%] z-10 bg-[#9dc3c2]">
     <div className="flex flex-col items-start text-left">
       <h4 className="text-md font-epilogue">{props.username}</h4>
       <h4 className="text-xl font-semibold">{props.title}</h4>

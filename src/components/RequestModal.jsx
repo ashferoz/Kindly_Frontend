@@ -16,7 +16,7 @@ const Overlay = (props) => {
       await usingFetch(
         "/api/requests/" + props.id,
         "PUT",
-        {volunteer_uuid : userCtx.userUUID},
+        {volunteer_uuid : userCtx.userUUID, beneficiary_uuid: props.beneficiary_uuid},
         userCtx.accessToken
       ),
     onSuccess: () => {
@@ -33,7 +33,7 @@ const Overlay = (props) => {
     }
   };
 
-  console.log(props.id)
+  console.log(props.beneficiary_uuid)
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
@@ -100,6 +100,7 @@ const RequestModal = (props) => {
           location={props.request.location}
           volunteer_id={props.request.volunteer_id}
           setShowRequestModal={props.setShowRequestModal}
+          beneficiary_uuid={props.request.beneficiary_uuid}
         />,
         document.querySelector("#root")
       )}

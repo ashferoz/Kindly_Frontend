@@ -31,7 +31,7 @@ const ConnectionsBeneficiary = () => {
 
   console.log(requestConnectData)
 
-  const { mutate : remove } = useMutation({
+  const { mutate : update } = useMutation({
     mutationFn: async () =>
       await usingFetch(
         "/api/requests/" + selectRequest.requestId,
@@ -42,11 +42,33 @@ const ConnectionsBeneficiary = () => {
     onSuccess: () => {
       setSelectRequest(prev => ({
         ...prev,
-        status: "ONGOING",
+        status: "OPEN",
       }));
       queryClient.invalidateQueries(["requestConnections"])
     },
   });
+
+  const { mutate : remove } = useMutation({
+    mutationFn: async () =>
+      await usingFetch(
+        "/api/connection/" + selectRequest.requestId,
+        "DELETE",
+        undefined,
+        userCtx.accessToken
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["requestConnections"]);
+    },
+  });
+
+  console.log(selectRequest.requestId)
+
+  const handleButton = () => {
+    if (selectRequest) {
+      update();
+      remove();
+    }
+  }
 
   console.log(requestConnectData)
 
@@ -90,16 +112,16 @@ const ConnectionsBeneficiary = () => {
           )}
           <div className="flex flex-col justify-end px-1 bg-white">
             {selectRequest && selectRequest.status === "OPEN" && (
-              <button onClick={remove} className="bg-[#8cb369] my-1">
+              <button onClick={ handleButton } className="bg-[#8cb369] my-1">
                 Decline offer
               </button>
             )}
 
             {selectRequest && selectRequest.status === "COMPLETE" && (
-              <p>This request is closed. Delete connection if no longer needed.</p>
+              <p>This request is closed. Delete  if no longer needed.</p>
             )}
 
-            <button className="bg-[#8cb369] my-1">Delete Connection</button>
+            <button onClick={ remove } className="bg-[#8cb369] my-1">Delete Connection</button>
             <div className="flex">
               <input type="text" className="border-2 w-full mr-2" />
               <button className="bg-[#8cb369] px-2">Send</button>

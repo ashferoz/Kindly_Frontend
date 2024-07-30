@@ -35,6 +35,8 @@ const Main = () => {
     setShowRequestModal(true);
   };
 
+  console.log(openRequests)
+
   return (
     <div>
       {showRequestModal && (
@@ -84,6 +86,7 @@ const Main = () => {
               urgency={item.urgency}
               location={item.location}
               username={item.username}
+              beneficiary_uuid = {item.beneficiary_uuid}
               onClick={() => handleCardClick(item)}
             />
           ))}

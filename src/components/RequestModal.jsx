@@ -65,10 +65,10 @@ const Overlay = (props) => {
                 {props.urgency.toLowerCase().replace('_', ' ')}
               </p>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.location.toLowerCase()}
+                {props.location.toLowerCase().replace('_', ' ')}
               </p>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.category.toLowerCase()}
+                {props.category.toLowerCase().replace('_', ' ')}
               </p>
             </div>
             <h3>Details:</h3>

@@ -148,7 +148,7 @@ const Profile = () => {
           requestConnectData.map((item) => {
             return (
               <RequestConnectedCard
-                key={item.id}
+                key={item.connection_id}
                 requestId={item.request_id}
                 title={item.title}
                 details={item.details}

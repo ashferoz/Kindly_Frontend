@@ -111,9 +111,9 @@ const ConnectionsVolunteer = () => {
                 <h4>Username: {selectRequest.username}</h4>
                 <h5>Details: {selectRequest.details} </h5>
                 <div className="flex mt-2">
-                  <h5 className="mr-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.category}</h5>
-                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.location}</h5>
-                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.urgency}</h5>
+                  <h5 className="mr-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.category.toLowerCase().replace('_', ' ')}</h5>
+                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.location.toLowerCase().replace('_', ' ')}</h5>
+                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.urgency.toLowerCase().replace('_', ' ')}</h5>
                 </div>
               </div>
 

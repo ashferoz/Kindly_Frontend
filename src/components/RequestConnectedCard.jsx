@@ -17,19 +17,19 @@ const RequestConnectedCard = (props) => {
           </div>
           <div className="flex">
             <div className="w-28  text-md font-medium">Category:</div>
-            <div className="flex-1  text-md ">{props.category.toLowerCase()}</div>
+            <div className="flex-1  text-md ">{props.category.toLowerCase().replace('_', ' ')}</div>
           </div>
           <div className="flex">
             <div className="w-28  text-md font-medium">Urgency:</div>
-            <div className="flex-1  text-md ">{props.urgency.toLowerCase()}</div>
+            <div className="flex-1  text-md ">{props.urgency.toLowerCase().replace('_', ' ')}</div>
           </div>
           <div className="flex">
             <div className="w-28  text-md font-medium">Location:</div>
-            <div className="flex-1  text-md ">{props.location.toLowerCase()}</div>
+            <div className="flex-1  text-md ">{props.location.toLowerCase().replace('_', ' ')}</div>
           </div>
           <div className="flex">
             <div className="w-28  text-md font-medium">Status:</div>
-            <div className="flex-1  text-md ">{props.status.toLowerCase().replace('_', ' ')}</div>
+            <div className="flex-1  text-md ">{props.status.toLowerCase()}</div>
           </div>
         </div>
         <div className="flex flex-col mt-5 justify-end">

@@ -14,7 +14,7 @@ const ConnectionSideBarCard = (props) => {
           >
             <h2 className="text-2xl ">{props.username}</h2>
             <h3 className="font-epilogue py-1">{props.title}</h3>
-            <h3 className="font-epilogue bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl text-xs">{props.status}</h3>
+            <h3 className="font-epilogue bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl text-xs">{props.status.toLowerCase()}</h3>
           </div>
         </>
       )}
@@ -27,7 +27,7 @@ const ConnectionSideBarCard = (props) => {
           >
             <h2 className="text-2xl">{props.usernameVolunteer}</h2>
             <h3 className="font-epilogue py-1">{props.title}</h3>
-            <h3 className="font-epilogue bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl text-xs">{props.status}</h3>
+            <h3 className="font-epilogue bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl text-xs">{props.status.toLowerCase()}</h3>
           </div>
         </>
       )}

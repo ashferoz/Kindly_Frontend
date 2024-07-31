@@ -15,6 +15,12 @@ const RequestForm = () => {
   const [category, setCategory] = useState("");
   const [urgency, setUrgency] = useState("");
   const [location, setLocation] = useState("");
+  const [errors, setErrors] = useState({
+    title: "",
+    category: "",
+    urgency: "",
+    location: "",
+  });
 
   const { mutate } = useMutation({
     mutationFn: async () =>
@@ -61,17 +67,65 @@ const RequestForm = () => {
       await usingFetch("/locations/", "GET", undefined, undefined),
   });
 
+  const validate = () => {
+    const newErrors = { ...errors };
+    let isValid = true;
+
+    if (!title) {
+      newErrors.title = "Title is required";
+      isValid = false;
+    } else {
+      newErrors.title = "";
+    }
+
+    if (!category) {
+      newErrors.category = "Category is required";
+      isValid = false;
+    } else {
+      newErrors.category = "";
+    }
+
+    if (!urgency) {
+      newErrors.urgency = "Urgency is required";
+      isValid = false;
+    } else {
+      newErrors.urgency = "";
+    }
+
+    if (!location) {
+      newErrors.location = "Location is required";
+      isValid = false;
+    } else {
+      newErrors.location = "";
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSubmitBtn = () => {
+    if (validate()) {
+      mutate();
+    }
+  };
+
   return (
     <div className="flex justify-center text-center min-h-screen bg-[#ffc0cc] font-epilogue">
       <div className="flex flex-col mt-20 mb-10">
         <h1 className="text-3xl font-bold font-fraunces mb-5">Request Form</h1>
-        <p className="text-left  mb-1">Title</p>
+        <h2 className="text-sm mb-5">
+          Please provide all required details to register with us.
+        </h2>
+        <p className="text-left  mb-1">
+          Title<span className="text-[#eb5353]">&#42;</span>
+        </p>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-auto mb-5 h-10 pl-3"
           type="text"
         />
+        {errors.title && <p className="text-[#eb5353] mb-5">{errors.title}</p>}
 
         <p className="text-left  mb-1">Details</p>
         <textarea
@@ -98,6 +152,7 @@ const RequestForm = () => {
               </option>
             ))}
         </select>
+        {errors.category && <p className="text-[#eb5353] mb-5">{errors.category}</p>}
 
         <select
           value={urgency}
@@ -110,6 +165,8 @@ const RequestForm = () => {
           <option value="URGENT">urgent</option>
           <option value="NOT_URGENT">not urgent</option>
         </select>
+
+        {errors.urgency && <p className="text-[#eb5353] mb-5">{errors.urgency}</p>}
 
         <select
           value={location}
@@ -127,8 +184,10 @@ const RequestForm = () => {
             ))}
         </select>
 
+        {errors.location && <p className="text-[#eb5353] mb-5">{errors.location}</p>}
+
         <button
-          onClick={mutate}
+          onClick={handleSubmitBtn}
           className="bg-[#0753d8] text-white w-auto text-s h-9 rounded-lg hover:bg-[#eb5353] active:bg-[#a54040] transition-colors duration-150 ease-in-out"
         >
           Submit

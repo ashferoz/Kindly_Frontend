@@ -73,6 +73,52 @@ const Profile = () => {
       ),
   });
 
+  let sortedConnections = [];
+
+  if (requestConnectData) {
+    const connectionsCopy = [...requestConnectData];
+
+    connectionsCopy.sort((a, b) => {
+      const dateA = new Date(a.date_connected);
+      const dateB = new Date(b.date_connected);
+
+      return dateB - dateA;
+    });
+
+    sortedConnections = connectionsCopy;
+  }
+
+  let sortedRequests = [];
+
+  if (requestData) {
+    const requestCopy = [...requestData];
+
+    requestCopy.sort((a, b) => {
+      const dateA = new Date(a.date_created);
+      const dateB = new Date(b.date_created);
+
+      return dateB - dateA;
+    });
+
+    sortedRequests = requestCopy;
+  }
+
+  const ongoingRequests = sortedRequests.filter(
+    (request) => request.status !== "COMPLETE"
+  );
+
+  const completedRequests = sortedRequests.filter(
+    (request) => request.status === "COMPLETE"
+  );
+
+  const ongoingConnections = sortedConnections.filter(
+    (request) => request.status !== "COMPLETE"
+  );
+
+  const completedConnections = sortedConnections.filter(
+    (request) => request.status === "COMPLETE"
+  );
+
   const handleCardClick = (request) => {
     setSelectRequest(request);
     setShowUpdateModal(true);
@@ -108,7 +154,10 @@ const Profile = () => {
                 Edit Profile
               </button>
               <div className="flex items-center">
-                <h1 className="text-5xl py-2">Hello, <span className="font-fraunces italic">{item.username}!</span></h1>
+                <h1 className="text-5xl py-2">
+                  Hello,{" "}
+                  <span className="font-fraunces italic">{item.username}!</span>
+                </h1>
                 {userCtx.role === "BENEFICIARY" && (
                   <p className="bg-[#ffc0cc] h-auto w-auto mx-4 px-3 rounded-3xl">
                     {item.location_id}
@@ -116,7 +165,7 @@ const Profile = () => {
                 )}
               </div>
               <br />
-              <hr className="border-[#ae7ed4]"/>
+              <hr className="border-[#ae7ed4]" />
               {userCtx.role === "BENEFICIARY" ? (
                 <>
                   <button
@@ -135,7 +184,7 @@ const Profile = () => {
                       (this will be shown to beneficiaries)
                     </span>
                   </h2>
-                
+
                   <h2 className="text-2xl mt-4">Ongoing</h2>
                 </>
               )}
@@ -145,7 +194,7 @@ const Profile = () => {
 
       <div className="w-full mx-auto pb-2 px-32 flex flex-wrap gap-10 justify-start">
         {requestConnectIsSuccess &&
-          requestConnectData.map((item) => {
+          ongoingConnections.map((item) => {
             return (
               <RequestConnectedCard
                 key={item.connection_id}
@@ -167,7 +216,7 @@ const Profile = () => {
 
       <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
         {requestIsSuccess &&
-          requestData.map((item) => {
+          ongoingRequests.map((item) => {
             return (
               <UserRequestCard
                 key={item.id}
@@ -188,9 +237,51 @@ const Profile = () => {
       </div>
 
       {userCtx.role === "BENEFICIARY" ? (
-        <h2 className="text-2xl pl-20 pb-10">Completed requests</h2>
+        <>
+          <h2 className="text-2xl pl-20 pb-10">Completed requests</h2>
+          <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
+            {requestIsSuccess &&
+              completedRequests.map((item) => {
+                return (
+                  <UserRequestCard
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    details={item.details}
+                    category={item.category}
+                    urgency={item.urgency}
+                    location={item.location}
+                    status={item.status}
+                    onClick={() => handleCardClick(item)}
+                  />
+                );
+              })}
+          </div>
+        </>
       ) : (
-        <h2 className="text-2xl pl-20 pb-10">Requests you have helped with</h2>
+        <>
+          <h2 className="text-2xl pl-20 pb-10">
+            Requests you have helped with
+          </h2>
+          <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
+            {requestConnectIsSuccess &&
+              completedConnections.map((item) => {
+                return (
+                  <RequestConnectedCard
+                    key={item.connection_id}
+                    requestId={item.request_id}
+                    title={item.title}
+                    details={item.details}
+                    category={item.category}
+                    urgency={item.urgency}
+                    location={item.location}
+                    status={item.status}
+                    beneficiary_username={item.beneficiary_username}
+                  />
+                );
+              })}
+          </div>
+        </>
       )}
 
       {userIsFetching && <h1>Loading...</h1>}

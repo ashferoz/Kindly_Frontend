@@ -25,7 +25,13 @@ const Main = () => {
     data?.filter(
       (item) => item.status === "OPEN" || item.status === "ONGOING"
     ) || [];
-    
+
+  const sortedOpenRequests = [...openRequests].sort((a, b) => {
+    const dateA = new Date(a.date_created);
+    const dateB = new Date(b.date_created);
+    return dateB - dateA;
+  });
+
   const completeCount =
     data?.filter((item) => item.status === "COMPLETE").length || 0;
 
@@ -48,7 +54,9 @@ const Main = () => {
             <RequestCounter count={completeCount} />
 
             <h3 className="font-epilogue text-4xl text-center py-5 font-light">
-              <span className="font-medium">Give</span> and <span className="font-medium">receive</span> help in your community.
+              <span className="font-medium">Give</span> and{" "}
+              <span className="font-medium">receive</span> help in your
+              community.
             </h3>
           </>
         )}
@@ -75,7 +83,7 @@ const Main = () => {
       </div>
       <div className="bg-[#fffae1] w-full mx-auto py-20 px-32 flex flex-wrap gap-10 justify-start">
         {isSuccess &&
-          openRequests.map((item) => (
+          sortedOpenRequests.map((item) => (
             <RequestCard
               key={item.id}
               title={item.title}
@@ -83,7 +91,7 @@ const Main = () => {
               urgency={item.urgency}
               location={item.location}
               username={item.username}
-              beneficiary_uuid = {item.beneficiary_uuid}
+              beneficiary_uuid={item.beneficiary_uuid}
               onClick={() => handleCardClick(item)}
             />
           ))}

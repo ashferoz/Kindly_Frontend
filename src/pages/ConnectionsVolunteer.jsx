@@ -76,12 +76,27 @@ const ConnectionsVolunteer = () => {
     },
   });
 
+  let sortedConnections = [];
+
+  if (requestConnectData) {
+    const connectionsCopy = [...requestConnectData];
+  
+    connectionsCopy.sort((a, b) => {
+      const dateA = new Date(a.date_connected);
+      const dateB = new Date(b.date_connected);
+  
+      return dateB - dateA;
+    });
+  
+    sortedConnections = connectionsCopy;
+  }
+
   return (
     <>
       <div className="bg-[#fffae1] h-[93vh] w-screen text-[#373737] mt-14 flex flex-wrap justify-between">
         <div className="w-1/4 h-full overflow-y-auto bg-[#ffeca7]">
           {requestConnectIsSuccess &&
-            requestConnectData.map((item) => {
+            sortedConnections.map((item) => {
               return (
                 <ConnectionSideBarCard
                   key={item.connection_id}
@@ -111,9 +126,15 @@ const ConnectionsVolunteer = () => {
                 <h4>Username: {selectRequest.username}</h4>
                 <h5>Details: {selectRequest.details} </h5>
                 <div className="flex mt-2">
-                  <h5 className="mr-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.category.toLowerCase().replace('_', ' ')}</h5>
-                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.location.toLowerCase().replace('_', ' ')}</h5>
-                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">{selectRequest.urgency.toLowerCase().replace('_', ' ')}</h5>
+                  <h5 className="mr-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">
+                    {selectRequest.category.toLowerCase().replace("_", " ")}
+                  </h5>
+                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">
+                    {selectRequest.location.toLowerCase().replace("_", " ")}
+                  </h5>
+                  <h5 className="mx-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">
+                    {selectRequest.urgency.toLowerCase().replace("_", " ")}
+                  </h5>
                 </div>
               </div>
 

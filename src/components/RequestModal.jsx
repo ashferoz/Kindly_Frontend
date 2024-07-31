@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ReactDOM from "react-dom";
 import UserContext from "../contexts/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ const Overlay = (props) => {
   const usingFetch = useFetch();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [submitError, setSubmitError] = useState("");
 
   const { mutate } = useMutation({
     mutationFn: async () =>
@@ -26,6 +27,9 @@ const Overlay = (props) => {
       queryClient.invalidateQueries(["requests"]);
       props.setShowRequestModal(false);
       navigate("/inbox");
+    },
+    onError: (error) => {
+      setSubmitError("You are already connected to this request.");
     },
   });
 
@@ -62,27 +66,32 @@ const Overlay = (props) => {
             <hr className="mb-6" />
             <div className="text-xs h-fit font-normal mb-5">
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.urgency.toLowerCase().replace('_', ' ')}
+                {props.urgency.toLowerCase().replace("_", " ")}
               </p>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.location.toLowerCase().replace('_', ' ')}
+                {props.location.toLowerCase().replace("_", " ")}
               </p>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.category.toLowerCase().replace('_', ' ')}
+                {props.category.toLowerCase().replace("_", " ")}
               </p>
             </div>
             <h3>Details:</h3>
             <p>{props.details}</p>
           </div>
           {userCtx.role === "BENEFICIARY" ? null : (
-            <div className="flex mt-auto">
-              <button
-                onClick={handleBtn}
-                className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out px-3 py-1 text-white w-full"
-              >
-                Help out
-              </button>
-            </div>
+            <>
+              {submitError && (
+                <p className="text-[#eb5353] mb-3">{submitError}</p>
+              )}
+              <div className="flex mt-auto">
+                <button
+                  onClick={handleBtn}
+                  className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out px-3 py-1 text-white w-full"
+                >
+                  Help out
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>

@@ -78,8 +78,9 @@ const Overlay = (props) => {
           <p className="text-left  mb-1">Details</p>
           <textarea
             value={details}
+            placeholder="Optional but recommended"
             onChange={(e) => setDetails(e.target.value)}
-            className="w-auto mb-5 h-20 p-3"
+            className="w-auto mb-5 h-20 pl-3 pt-2"
             rows="4"
             cols="50"
           />
@@ -101,47 +102,45 @@ const Overlay = (props) => {
           </select>
 
           <select
-          value={urgency}
-          onChange={(e) => setUrgency(e.target.value)}
-          className="w-auto mb-5 h-10 pl-3"
-        >
-          <option value="" disabled>
-            Select urgency
-          </option>
-          <option value="URGENT">urgent</option>
-          <option value="NOT_URGENT">not urgent</option>
-        </select>
-
+            value={urgency}
+            onChange={(e) => setUrgency(e.target.value)}
+            className="w-auto mb-5 h-10 pl-3"
+          >
+            <option value="" disabled>
+              Select urgency
+            </option>
+            <option value="URGENT">urgent</option>
+            <option value="NOT_URGENT">not urgent</option>
+          </select>
 
           <select
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="w-auto mb-5 h-10 pl-3"
-        >
-          <option value="" disabled>
-            Select location
-          </option>
-          {locationSuccess &&
-            locationdData.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.id.toLowerCase().replace("_", " ")}
-              </option>
-            ))}
-        </select>
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-auto mb-5 h-10 pl-3"
+          >
+            <option value="" disabled>
+              Select location
+            </option>
+            {locationSuccess &&
+              locationdData.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.id.toLowerCase().replace("_", " ")}
+                </option>
+              ))}
+          </select>
 
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="w-auto mb-5 h-10 pl-3"
-        >
-          <option value="" disabled>
-            Select status
-          </option>
-          <option value="OPEN">open</option>
-          <option value="ONGOING">ongoing</option>
-          <option value="COMPLETE">complete</option>
-        </select>
-
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="w-auto mb-5 h-10 pl-3"
+          >
+            <option value="" disabled>
+              Select status
+            </option>
+            <option value="OPEN">open</option>
+            <option value="ONGOING">ongoing</option>
+            <option value="COMPLETE">complete</option>
+          </select>
 
           <button
             onClick={mutate}

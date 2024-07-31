@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import useFetch from "../hooks/useFetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import UserContext from "../contexts/user";
+import { useQuery } from "@tanstack/react-query";
 
 const Overlay = (props) => {
   const userCtx = useContext(UserContext);
@@ -29,15 +30,39 @@ const Overlay = (props) => {
     },
   });
 
+  const {
+    isSuccess: categorySuccess,
+    isError: categoryIsError,
+    error: categoryError,
+    isFetching: categoryIsFetching,
+    data: categorydData,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () =>
+      await usingFetch("/category/", "GET", undefined, undefined),
+  });
+
+  const {
+    isSuccess: locationSuccess,
+    isError: locationIsError,
+    error: locationError,
+    isFetching: locationIsFetching,
+    data: locationdData,
+  } = useQuery({
+    queryKey: ["locations"],
+    queryFn: async () =>
+      await usingFetch("/locations/", "GET", undefined, undefined),
+  });
+
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
       <div className="w-[600px] h-auto bg-[#ffc0cc] text-[#373737] font-epilogue relative">
-      <button
-      onClick={() => props.setShowUpdateModal(false)}
-      className="absolute top-2 right-2 bg-[#eb5353] hover:bg-[#e96363] transition-colors duration-200 ease-in-out text-white px-2 py-1"
-    >
-      Cancel
-    </button>
+        <button
+          onClick={() => props.setShowUpdateModal(false)}
+          className="absolute top-2 right-2 bg-[#eb5353] hover:bg-[#e96363] transition-colors duration-200 ease-in-out text-white px-2 py-1"
+        >
+          Cancel
+        </button>
         <div className="flex flex-col p-8">
           <h1 className="text-3xl text-center font-bold font-fraunces mb-3">
             Update Request
@@ -59,34 +84,65 @@ const Overlay = (props) => {
             cols="50"
           />
 
-          <p className="text-left  mb-1">Category</p>
-          <input
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-auto  mb-5 h-10 pl-3"
-            type="text"
-          />
-          <p className="text-left  mb-1">Urgency</p>
-          <input
-            value={urgency}
-            onChange={(e) => setUrgency(e.target.value)}
-            className="w-auto  mb-5 h-10 pl-3"
-            type="text"
-          />
-          <p className="text-left  mb-1">Location</p>
-          <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="w-auto  mb-5 h-10 pl-3"
-            type="text"
-          />
-          <p className="text-left mb-1">Status</p>
-          <input
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="w-auto  mb-5 h-10 pl-3"
-            type="text"
-          />
+            className="w-auto mb-5 h-10 pl-3"
+          >
+            <option value="" disabled>
+              Select category
+            </option>
+            {categorySuccess &&
+              categorydData.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.id.toLowerCase().replace("_", " ")}
+                </option>
+              ))}
+          </select>
+
+          <select
+          value={urgency}
+          onChange={(e) => setUrgency(e.target.value)}
+          className="w-auto mb-5 h-10 pl-3"
+        >
+          <option value="" disabled>
+            Select urgency
+          </option>
+          <option value="URGENT">urgent</option>
+          <option value="NOT_URGENT">not urgent</option>
+        </select>
+
+
+          <select
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="w-auto mb-5 h-10 pl-3"
+        >
+          <option value="" disabled>
+            Select location
+          </option>
+          {locationSuccess &&
+            locationdData.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.id.toLowerCase().replace("_", " ")}
+              </option>
+            ))}
+        </select>
+
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-auto mb-5 h-10 pl-3"
+        >
+          <option value="" disabled>
+            Select status
+          </option>
+          <option value="OPEN">open</option>
+          <option value="ONGOING">ongoing</option>
+          <option value="COMPLETE">complete</option>
+        </select>
+
+
           <button
             onClick={mutate}
             className="hover:bg-[#4d7aff] bg-[#0753d8] text-white text-s h-9 rounded-lg transition-colors duration-200 ease-in-out mt-2"

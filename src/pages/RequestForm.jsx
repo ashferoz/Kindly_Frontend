@@ -76,6 +76,7 @@ const RequestForm = () => {
         <p className="text-left  mb-1">Details</p>
         <textarea
           value={details}
+          placeholder="Optional but recommended"
           onChange={(e) => setDetails(e.target.value)}
           className="w-auto mb-5 h-20 pl-3 pt-2"
           rows="4"

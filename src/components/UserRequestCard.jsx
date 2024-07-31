@@ -25,7 +25,7 @@ const UserRequestCard = (props) => {
 
   return (
     <>
-      <div className="w-[350px] h-auto bg-[#9dc3c2] flex flex-col justify-between p-4 font-epilogue text-[#352a1f]">
+      <div className="w-[350px] h-auto bg-[#ffeca7] flex flex-col justify-between p-4 font-epilogue text-[#373737] hover:scale-105 transition-transform duration-200 ease-in-out">
         <div className="flex flex-col">
           <div className="flex">
             <div className="w-24  text-md font-medium">Title:</div>
@@ -54,12 +54,12 @@ const UserRequestCard = (props) => {
         </div>
         <div className="flex flex-col justify-end">
           <button
-            className="bg-[#77a6b6]  m-1 rounded-md"
+            className="hover:bg-[#4d7aff] bg-[#0753d8] text-white m-1 text-s h-8 mt-5 rounded-lg transition-colors duration-200 ease-in-out"
             onClick={props.onClick}
           >
             Update
           </button>
-          <button onClick={mutate} className="bg-[#6a994e]  m-1 rounded-md">
+          <button onClick={mutate} className="bg-[#eb5353] hover:bg-[#e96363] text-white m-1 text-s h-8 rounded-lg transition-colors duration-200 ease-in-out">
             Remove
           </button>
         </div>

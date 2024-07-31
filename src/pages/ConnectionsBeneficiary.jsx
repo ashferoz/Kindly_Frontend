@@ -62,7 +62,7 @@ const ConnectionsBeneficiary = () => {
   return (
     <>
       <div className="bg-[#fffae1] h-[93vh] w-screen text-[#352a1f] mt-14 flex flex-wrap justify-between">
-        <div className="w-1/4 h-full overflow-y-auto bg-[#cfe0bf]">
+        <div className="w-1/4 h-full overflow-y-auto bg-[#ffeca7]">
           {requestConnectIsSuccess &&
             requestConnectData.map((item) => {
               return (
@@ -92,7 +92,7 @@ const ConnectionsBeneficiary = () => {
         {selectRequest ? (
           <>
             <div className="w-3/4 h-full flex flex-col justify-between font-epilogue">
-              <div className="p-5">
+              <div className="p-5 bg-[#eeeadd] border-b border-[#dfdcd1]">
                 <h4>Username: {selectRequest.usernameVolunteer}</h4>
                 <div className="flex">
                   <h5 className="mr-5">Bio: {selectRequest.bio}</h5>

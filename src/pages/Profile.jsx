@@ -78,7 +78,7 @@ const Profile = () => {
     setShowUpdateModal(true);
   };
   return (
-    <div className="bg-[#fffdf7] h-full text-[#352a1f] mt-14">
+    <div className="bg-[#fffae1] h-auto font-epilogue text-[#373737] mt-14">
       {showUpdateModal && (
         <UpdateRequestModal
           request={selectRequest}
@@ -103,23 +103,25 @@ const Profile = () => {
               )}
               <button
                 onClick={() => setShowUserUpdateModal(true)}
-                className="bg-[#386641] text-white rounded-lg fixed right-5 top-14 px-4 py-1 mt-4 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
+                className="bg-[#32bf68] text-white rounded-lg absolute right-24 top-26 px-4 py-1 mt-4 font-medium text-xl hover:bg-[#2fab5e] transition-colors duration-300 ease-in-out"
               >
                 Edit Profile
               </button>
               <div className="flex items-center">
-                <h1 className="text-4xl">Hello, {item.username}!</h1>
+                <h1 className="text-5xl py-2">Hello, <span className="font-fraunces italic">{item.username}!</span></h1>
                 {userCtx.role === "BENEFICIARY" && (
-                  <p className="bg-[#ffc0cc] h-auto w-auto mx-4 px-3 rounded-3xl font-epilogue">
+                  <p className="bg-[#ffc0cc] h-auto w-auto mx-4 px-3 rounded-3xl">
                     {item.location_id}
                   </p>
                 )}
               </div>
+              <br />
+              <hr className="border-[#ae7ed4]"/>
               {userCtx.role === "BENEFICIARY" ? (
                 <>
                   <button
                     onClick={() => navigate("/requestFrom")}
-                    className="bg-[#386641] text-white rounded-lg mr-5 px-4 py-1 mt-4 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
+                    className="bg-[#32bf68] text-white mt-5 w-40 text-xl h-9 rounded-xl hover:bg-[#2fab5e] transition-colors duration-300 ease-in-out"
                   >
                     Post a request
                   </button>
@@ -127,12 +129,13 @@ const Profile = () => {
                 </>
               ) : (
                 <>
-                  <h2 className="text-2xl mt-4 font-epilogue">
+                  <h2 className="text-2xl mt-4">
                     Bio: {item.bio}{" "}
                     <span className="block text-sm italic">
                       (this will be shown to beneficiaries)
                     </span>
                   </h2>
+                
                   <h2 className="text-2xl mt-4">Ongoing</h2>
                 </>
               )}
@@ -140,7 +143,7 @@ const Profile = () => {
           );
         })}
 
-      <div className="w-full mx-auto pb-20 px-32 flex flex-wrap gap-10 justify-start">
+      <div className="w-full mx-auto pb-2 px-32 flex flex-wrap gap-10 justify-start">
         {requestConnectIsSuccess &&
           requestConnectData.map((item) => {
             return (

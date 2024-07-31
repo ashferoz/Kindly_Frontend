@@ -58,7 +58,7 @@ const Main = () => {
             <>
               <button
                 onClick={() => navigate("/requestFrom")}
-                className="bg-[#386641] text-white rounded-lg px-4 py-1 font-medium text-xl hover:bg-[#467c51] active:bg-[#3c6c46] transition-colors duration-150 ease-in-out"
+                className="bg-[#32bf68] text-white w-40 text-xl h-9 rounded-xl hover:bg-[#2fab5e] transition-colors duration-300 ease-in-out"
               >
                 Post a request
               </button>

@@ -5,7 +5,7 @@ const RequestConnectedCard = (props) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-[350px] h-auto bg-[#9dc3c2] flex flex-col justify-between p-4 font-epilogue text-[#352a1f]">
+      <div className="w-[350px] h-auto bg-[#ffeca7] flex flex-col justify-between p-4 font-epilogue text-[#373737] hover:scale-105 transition-transform duration-200 ease-in-out">
         <div className="flex flex-col">
           <div className="flex">
             <div className="w-28  text-md font-medium">Beneficiary:</div>
@@ -15,10 +15,6 @@ const RequestConnectedCard = (props) => {
             <div className="w-28  text-md font-medium">Title:</div>
             <div className="flex-1  text-md ">{props.title}</div>
           </div>
-          {/* <div className="flex">
-            <div className="w-28  text-md font-medium">Details:</div>
-            <div className="flex-1  text-md ">{props.details}</div>
-          </div> */}
           <div className="flex">
             <div className="w-28  text-md font-medium">Category:</div>
             <div className="flex-1  text-md ">{props.category}</div>
@@ -39,7 +35,7 @@ const RequestConnectedCard = (props) => {
         <div className="flex flex-col mt-5 justify-end">
           {(props.status === "OPEN" || props.status === "ONGOING") && (
             <button
-              className="bg-[#0753d8] text-white m-1 rounded-md"
+              className="hover:bg-[#4d7aff] bg-[#0753d8] text-white m-1 text-s h-8 mt-5 rounded-lg transition-colors duration-200 ease-in-out"
               onClick={() => navigate("/inbox")}
             >
               Chat with {props.beneficiary_username}

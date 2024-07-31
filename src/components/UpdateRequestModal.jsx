@@ -31,10 +31,10 @@ const Overlay = (props) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
-      <div className="w-[600px] h-auto bg-[#ffc0cc] font-epilogue relative">
+      <div className="w-[600px] h-auto bg-[#ffc0cc] text-[#373737] font-epilogue relative">
       <button
       onClick={() => props.setShowUpdateModal(false)}
-      className="absolute top-2 right-2 bg-[#0753d8] text-white rounded-lg px-2"
+      className="absolute top-2 right-2 bg-[#eb5353] hover:bg-[#e96363] transition-colors duration-200 ease-in-out text-white px-2 py-1"
     >
       Cancel
     </button>
@@ -54,7 +54,7 @@ const Overlay = (props) => {
           <textarea
             value={details}
             onChange={(e) => setDetails(e.target.value)}
-            className="w-auto mb-5 h-20 pl-3"
+            className="w-auto mb-5 h-20 p-3"
             rows="4"
             cols="50"
           />
@@ -89,7 +89,7 @@ const Overlay = (props) => {
           />
           <button
             onClick={mutate}
-            className="bg-[#0753d8] text-white w-auto text-s h-9 rounded-lg hover:bg-[#eb5353] active:bg-[#a54040] transition-colors duration-150 ease-in-out"
+            className="hover:bg-[#4d7aff] bg-[#0753d8] text-white text-s h-9 rounded-lg transition-colors duration-200 ease-in-out mt-2"
           >
             Update
           </button>

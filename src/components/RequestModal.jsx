@@ -62,13 +62,13 @@ const Overlay = (props) => {
             <hr className="mb-6" />
             <div className="text-xs h-fit font-normal mb-5">
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.urgency}
+                {props.urgency.toLowerCase().replace('_', ' ')}
               </p>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.location}
+                {props.location.toLowerCase()}
               </p>
               <p className="bg-[#ffc0cc] w-auto inline-block mx-2 px-3 py-1 rounded-3xl">
-                {props.category}
+                {props.category.toLowerCase()}
               </p>
             </div>
             <h3>Details:</h3>

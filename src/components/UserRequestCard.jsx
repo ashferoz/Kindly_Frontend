@@ -54,7 +54,7 @@ const UserRequestCard = (props) => {
         </div>
         <div className="flex flex-col justify-end">
           <button
-            className="hover:bg-[#4d7aff] bg-[#0753d8] text-white m-1 text-s h-8 mt-5 rounded-lg transition-colors duration-200 ease-in-out"
+            className="hover:bg-[#f7d35d] bg-[#f3c83b] m-1 text-s h-8 mt-5 rounded-lg transition-colors duration-200 ease-in-out"
             onClick={props.onClick}
           >
             Update

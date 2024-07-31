@@ -67,7 +67,7 @@ const ConnectionsBeneficiary = () => {
             requestConnectData.map((item) => {
               return (
                 <ConnectionSideBarCard
-                  key={item.id}
+                  key={item.connection_id}
                   connection_id={item.connection_id}
                   requestId={item.request_id}
                   title={item.title}

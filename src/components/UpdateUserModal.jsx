@@ -10,6 +10,13 @@ const Overlay = (props) => {
   const [username, setUsername] = useState(props.username);
   const [email, setEmail] = useState(props.email);
   const [bio, setBio] = useState(props.bio);
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+  });
+
   const userCtx = useContext(UserContext);
   const usingFetch = useFetch();
   const queryClient = useQueryClient();
@@ -34,6 +41,48 @@ const Overlay = (props) => {
       props.setShowUserUpdateModal(false)
     },
   });
+
+  const validate = () => {
+    const newErrors = { ...errors };
+    let isValid = true;
+
+    if (!firstName) {
+      newErrors.firstName = "First name is required";
+      isValid = false;
+    } else {
+      newErrors.firstName = "";
+    }
+
+    if (!lastName) {
+      newErrors.lastName = "Last name is required";
+      isValid = false;
+    } else {
+      newErrors.lastName = "";
+    }
+
+    if (!email.includes('@.com')) {
+      newErrors.email = "Email needs to be valid";
+      isValid = false;
+    } else {
+      newErrors.email = "";
+    }
+
+    if (!username) {
+      newErrors.username = "Username is required";
+      isValid = false;
+    } else {
+      newErrors.username = "";
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSubmitBtn = () => {
+    if (validate()) {
+      mutate();
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-[#00000078] z-50 font-epilogue">
@@ -64,6 +113,8 @@ const Overlay = (props) => {
               className="w-60 h-10 pl-3"
             />
           </div>
+          {errors.firstName && <p className="text-[#eb5353] mb-5">{errors.firstName}</p>}
+          {errors.lastName && <p className="text-[#eb5353] mb-5">{errors.lastName}</p>}
 
           <p className="text-left  mb-1">Username</p>
           <input
@@ -72,6 +123,7 @@ const Overlay = (props) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          {errors.username && <p className="text-[#eb5353] mb-5">{errors.username}</p>}
 
           <p className="text-left  mb-1">Email</p>
           <input
@@ -80,12 +132,13 @@ const Overlay = (props) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {errors.email && <p className="text-[#eb5353] mb-5">{errors.email}</p>}
 
           {userCtx.role === "VOLUNTEER" && (
             <>
               <p className="text-left  mb-1">Bio</p>
               <textarea
-                className="w-auto mb-5 h-20 pl-3"
+                className="w-auto mb-5 h-20 p-3"
                 rows="4"
                 cols="50"
                 value={bio}
@@ -95,7 +148,7 @@ const Overlay = (props) => {
           )}
 
           <button
-            onClick={mutate}
+            onClick={handleSubmitBtn}
             className="hover:bg-[#4d7aff] bg-[#0753d8] text-white text-s h-9 rounded-lg transition-colors duration-200 ease-in-out mt-2"
           >
             Update

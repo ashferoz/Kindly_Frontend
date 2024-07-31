@@ -7,6 +7,7 @@ import UserRequestCard from "../components/UserRequestCard";
 import { useNavigate } from "react-router-dom";
 import RequestConnectedCard from "../components/RequestConnectedCard";
 import UpdateUserModal from "../components/UpdateUserModal";
+import VolunteerRequestCounter from "../components/VolunteerRequestCounter";
 
 const Profile = () => {
   const userCtx = useContext(UserContext);
@@ -124,7 +125,7 @@ const Profile = () => {
     setShowUpdateModal(true);
   };
   return (
-    <div className="bg-[#fffae1] h-auto font-epilogue text-[#373737] mt-14">
+    <div className="bg-[#fffae1] min-h-screen font-epilogue text-[#373737] mt-14">
       {showUpdateModal && (
         <UpdateRequestModal
           request={selectRequest}
@@ -158,6 +159,7 @@ const Profile = () => {
                   Hello,{" "}
                   <span className="font-fraunces italic">{item.username}!</span>
                 </h1>
+                {userCtx.role === "VOLUNTEER" && <VolunteerRequestCounter count={completedConnections.length}/>}
                 {userCtx.role === "BENEFICIARY" && (
                   <p className="bg-[#ffc0cc] h-auto w-auto mx-4 px-3 rounded-3xl">
                     {item.location_id}
@@ -181,7 +183,7 @@ const Profile = () => {
                   <h2 className="text-2xl mt-4">
                     Bio: {item.bio}{" "}
                     <span className="block text-sm italic">
-                      (this will be shown to beneficiaries)
+                      (note: This will be shown to beneficiaries.)
                     </span>
                   </h2>
 

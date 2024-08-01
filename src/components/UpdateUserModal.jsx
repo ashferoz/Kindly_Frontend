@@ -60,7 +60,7 @@ const Overlay = (props) => {
       newErrors.lastName = "";
     }
 
-    if (!email.includes('@.com')) {
+    if (!email.includes('@')) {
       newErrors.email = "Email needs to be valid";
       isValid = false;
     } else {

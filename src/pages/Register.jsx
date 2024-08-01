@@ -65,7 +65,7 @@ const Register = () => {
       newErrors.lastname = "";
     }
 
-    if (!email.includes('@.com')) {
+    if (!email.includes('@')) {
       newErrors.email = "Email needs to be valid";
       isValid = false;
     } else {

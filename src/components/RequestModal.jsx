@@ -88,7 +88,7 @@ const Overlay = (props) => {
                   onClick={handleBtn}
                   className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out px-3 py-1 text-white w-full"
                 >
-                  Help out
+                  I'm interested
                 </button>
               </div>
             </>

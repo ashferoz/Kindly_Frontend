@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 import UserContext from "../contexts/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ConnectionSideBarCard from "../components/ConnectionSideBarCard";
+import ChatArea from "../components/ChatArea";
 
 const ConnectionsVolunteer = () => {
   const usingFetch = useFetch();
@@ -80,16 +81,18 @@ const ConnectionsVolunteer = () => {
 
   if (requestConnectData) {
     const connectionsCopy = [...requestConnectData];
-  
+
     connectionsCopy.sort((a, b) => {
       const dateA = new Date(a.date_connected);
       const dateB = new Date(b.date_connected);
-  
+
       return dateB - dateA;
     });
-  
+
     sortedConnections = connectionsCopy;
   }
+
+  console.log(selectRequest)
 
   return (
     <>
@@ -121,11 +124,11 @@ const ConnectionsVolunteer = () => {
 
         {selectRequest ? (
           <>
-            <div className="w-3/4 h-full flex flex-col justify-between font-epilogue">
-              <div className="p-5 bg-[#eeeadd] border-b border-[#dfdcd1]">
+            <div className="w-3/4 h-full font-epilogue">
+              <div className="pl-5 pt-5 pb-2 bg-[#eeeadd] border-b border-[#dfdcd1]">
                 <h4>Username: {selectRequest.username}</h4>
                 <h5>Details: {selectRequest.details} </h5>
-                <div className="flex mt-2">
+                <div className="flex my-2">
                   <h5 className="mr-5 bg-[#ffc0cc] w-auto inline-block px-3 py-1 rounded-3xl text-xs">
                     {selectRequest.category.toLowerCase().replace("_", " ")}
                   </h5>
@@ -136,14 +139,11 @@ const ConnectionsVolunteer = () => {
                     {selectRequest.urgency.toLowerCase().replace("_", " ")}
                   </h5>
                 </div>
-              </div>
-
-              <div className="flex flex-col justify-end">
-                <div className="ml-3 mb-2">
+                <div className="flex">
                   {selectRequest && selectRequest.status === "OPEN" && (
                     <button
                       onClick={accept}
-                      className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mx-2 my-1"
+                      className="hover:bg-[#4d7aff] bg-[#0753d8] text-sm transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mr-2"
                     >
                       Accept Request
                     </button>
@@ -152,7 +152,7 @@ const ConnectionsVolunteer = () => {
                   {selectRequest && selectRequest.status === "ONGOING" && (
                     <button
                       onClick={complete}
-                      className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mx-2 my-1"
+                      className="hover:bg-[#4d7aff] bg-[#0753d8] text-sm transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mr-2"
                     >
                       Request Completed
                     </button>
@@ -160,26 +160,24 @@ const ConnectionsVolunteer = () => {
 
                   <button
                     onClick={remove}
-                    className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mx-2 my-1"
+                    className="hover:bg-[#4d7aff] bg-[#0753d8] text-sm transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2"
                   >
                     Delete Connection
                   </button>
-                </div>
 
-                {selectRequest && selectRequest.status === "COMPLETE" && (
-                  <p className="mx-5 mb-2 px-3 py-1 rounded-3xl text-sm bg-[#e96363] text-white">
-                    This request is closed. Delete connection if no longer
-                    needed.
-                  </p>
-                )}
-
-                <div className="flex mb-5 mx-5">
-                  <input type="text" className="border-2 w-full mr-2 p-1" />
-                  <button className="hover:bg-[#2fab5e] bg-[#32bf68] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2">
-                    Send
-                  </button>
+                  <div className="absolute bottom-[80px]">
+                    {selectRequest && selectRequest.status === "COMPLETE" && (
+                      <p className=" mb-2 px-3 py-1 rounded-xl text-sm bg-[#e96363] text-white">
+                        This request is closed. Delete connection if no longer
+                        needed.
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
+
+              <ChatArea request={selectRequest} />
+              
             </div>
           </>
         ) : (

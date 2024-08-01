@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 import UserContext from "../contexts/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ConnectionSideBarCard from "../components/ConnectionSideBarCard";
+import ChatArea from "../components/ChatArea";
 
 const ConnectionsBeneficiary = () => {
   const usingFetch = useFetch();
@@ -92,47 +93,39 @@ const ConnectionsBeneficiary = () => {
         {selectRequest ? (
           <>
             <div className="w-3/4 h-full flex flex-col justify-between font-epilogue">
-              <div className="p-5 bg-[#eeeadd] border-b border-[#dfdcd1]">
+              <div className="pl-5 pt-5 pb-2 bg-[#eeeadd] border-b border-[#dfdcd1]">
                 <h4>Username: {selectRequest.usernameVolunteer}</h4>
                 <div className="flex">
                   <h5 className="mr-5">Bio: {selectRequest.bio}</h5>
                 </div>
-              </div>
-
-              <div className="flex flex-col justify-end">
-                <div className="ml-3 mb-2">
+                <div className="my-1">
                   {selectRequest && selectRequest.status === "ONGOING" && (
                     <button
                       onClick={update}
-                      className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mx-2 my-1"
+                      className="hover:bg-[#4d7aff] bg-[#0753d8] text-sm transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mr-2"
                     >
                       Decline offer
                     </button>
                   )}
                   <button
                     onClick={remove}
-                    className="hover:bg-[#4d7aff] bg-[#0753d8] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mx-2 my-1"
+                    className="hover:bg-[#4d7aff] bg-[#0753d8] text-sm transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2 mr-2"
                   >
                     Delete Connection
                   </button>
                 </div>
-
-                {selectRequest && selectRequest.status === "COMPLETE" && (
-                  <>
-                    <p className="mx-5 mb-2 px-3 py-1 rounded-3xl text-sm bg-[#e96363] text-white">
-                      This request is closed. Delete connection if no longer
-                      needed.
-                    </p>
-                  </>
-                )}
-
-                <div className="flex mb-5 mx-5">
-                  <input type="text" className="border-2 w-full mr-2 p-1" />
-                  <button className="hover:bg-[#2fab5e] bg-[#32bf68] transition-colors duration-200 ease-in-out text-white w-fit py-1 px-2">
-                    Send
-                  </button>
-                </div>
               </div>
+
+              <div className="absolute bottom-[80px]">
+                {selectRequest && selectRequest.status === "COMPLETE" && (
+                  <p className="mx-5 px-3 py-1 rounded-3xl text-sm bg-[#e96363] text-white">
+                    This request is closed. Delete connection if no longer
+                    needed.
+                  </p>
+                )}
+              </div>
+
+              <ChatArea />
             </div>
           </>
         ) : (
